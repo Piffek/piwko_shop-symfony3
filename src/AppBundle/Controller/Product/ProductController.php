@@ -26,15 +26,18 @@ class ProductController extends Controller
 		$form->handleRequest($request);
 		
 		if($form->isValid() && $form->isSubmitted()){
-			
 			foreach($oneItem as $items){
 				$amount = $form->getData();
-				$session->set('baskets',[
+				$session->set('basket',[
 						'name'=>$items->getName(),
 						'price'=>$items->getPrice(),
-						'amount'=>$amount['amount']
+						'amount'=>$amount['amount'],
 				]);
+				$sessionVal = $this->get('session')->get('aBasket');
+				$sessionVal[] = $session->get('basket');
+				$this->get('session')->set('aBasket', $sessionVal);
 			}
+
 			
 			return $this->redirectToRoute('homepage');
 		}
