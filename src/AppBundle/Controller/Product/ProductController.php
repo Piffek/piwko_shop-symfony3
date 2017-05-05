@@ -26,7 +26,9 @@ class ProductController extends Controller
 		$form->handleRequest($request);
 		
 		if($form->isValid() && $form->isSubmitted()){
+			
 			foreach($oneItem as $items){
+				
 				$amount = $form->getData();
 				$session->set('basket',[
 						'name'=>$items->getName(),
