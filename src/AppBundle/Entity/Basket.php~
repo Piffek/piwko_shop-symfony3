@@ -7,7 +7,8 @@ use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\ManyToMany;
 use Doctrine\ORM\Mapping\JoinColumn;
 use Doctrine\ORM\Mapping\JoinTable;
-use Doctrine\ORM\Mapping\OneToOne;
+use Doctrine\ORM\Mapping\OneToMany;
+use Doctrine\ORM\Mapping\ManyToOne;
 
 /**
  * Basket
@@ -35,15 +36,15 @@ class Basket
     
     /**
      * One Cart has One Customer.
-     * @ORM\OneToOne(targetEntity="User", inversedBy="basket")
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="basket")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
     protected $user;
     
     /**
      * One Cart has One Customer.
-     * @OneToOne(targetEntity="Item", inversedBy="basket")
-     * @JoinColumn(name="item_id", referencedColumnName="id")
+     * @ORM\ManyToOne(targetEntity="Item",inversedBy="basket")
+     * @ORM\JoinColumn(name="item_id", referencedColumnName="id")
      */
     protected $item;
 
@@ -81,5 +82,52 @@ class Basket
     {
         return $this->amount;
     }
-}
 
+    /**
+     * Set user
+     *
+     * @param \AppBundle\Entity\User $user
+     *
+     * @return Basket
+     */
+    public function setUser(\AppBundle\Entity\User $user = null)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \AppBundle\Entity\User
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+    /**
+     * Set item
+     *
+     * @param \AppBundle\Entity\Item $item
+     *
+     * @return Basket
+     */
+    public function setItem(\AppBundle\Entity\Item $item = null)
+    {
+        $this->item = $item;
+
+        return $this;
+    }
+
+    /**
+     * Get item
+     *
+     * @return \AppBundle\Entity\Item
+     */
+    public function getItem()
+    {
+        return $this->item;
+    }
+}

@@ -49,6 +49,11 @@ class Basket
     protected $item;
 
 
+    public function __construct()
+    {
+    	$this->user= new \Doctrine\Common\Collections\ArrayCollection();
+    	$this->item= new \Doctrine\Common\Collections\ArrayCollection();
+    }
     /**
      * Get id
      *

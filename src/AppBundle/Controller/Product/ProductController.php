@@ -18,7 +18,6 @@ class ProductController extends Controller
 		$session->start();
 		$em = $this->getDoctrine()->getRepository('AppBundle:Item');
 		$oneItem = $em->findById($id);
-
 		
 		$form = $this->createFormBuilder()
 		->add('amount')
@@ -28,18 +27,17 @@ class ProductController extends Controller
 		
 		if($form->isValid() && $form->isSubmitted()){
 			
-			$this->checkUserAuth($oneItem, $form, $session);
-
-			
+			$this->checkUserAuth($oneItem, $form, $session, $id);
 			return $this->redirectToRoute('homepage');
 		}
 
-		
 		return $this->render('product/oneProduct.html.twig',[
 				'oneItem' => $oneItem,
 				'form' => $form->createView(),
 		]);
 	}
+	
+	
 	
 	public function addProductToBasketIfUserUsLogOffAction($oneItem, $form, $session){
 		foreach($oneItem as $items){
@@ -56,19 +54,29 @@ class ProductController extends Controller
 	}
 	
 	
-	public function addProductToBasketIfUserisLogInAction($oneItem, $form, $session){
-			/**
-			 *
-			 * @var Basket $basket
-			 */
+	
+	
+	public function addProductToBasketIfUserisLogInAction($oneItem, $form, $session, $id){
+			
 			$amount = $form->getData();
+			$basket = new Basket;
+			$userid = $this->getUser()->getId();
+			$user = $this->getDoctrine()->getRepository('AppBundle:User')->find($userid);
+			$item = $this->getDoctrine()->getRepository('AppBundle:Item')->find($id);
+			$basket->setUser($user);
+			$basket->setItem($item);
+			$basket->setAmount($amount['amount']);
 			$em = $this->getDoctrine()->getManager();
-			$basket->set;
+			$em->persist($basket);
+			$em->flush();
 	}
-	public function checkUserAuth($oneItem, $form, $session){
+	
+	
+	
+	public function checkUserAuth($oneItem, $form, $session, $id){
 		$securityContext = $this->container->get('security.authorization_checker');
 		if ($securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
-			$this->addProductToBasketIfUserisLogInAction($oneItem, $form, $session);
+			$this->addProductToBasketIfUserisLogInAction($oneItem, $form, $session, $id);
 		}else{
 			$this->addProductToBasketIfUserUsLogOffAction($oneItem, $form, $session);
 		}
