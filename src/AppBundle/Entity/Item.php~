@@ -82,8 +82,8 @@ class Item
     private $createdAt;
     
     /**
-     * @ORM\OneToMany(targetEntity="Basket", mappedBy="item")
-     * @ORM\JoinColumn(name="item_id", referencedColumnName="id")
+     * One Customer has One Cart.
+     * @ORM\OneToOne(targetEntity="Basket", mappedBy="Item")
      */
 	protected $basket;
 
@@ -287,29 +287,5 @@ class Item
     public function getCreatedAt()
     {
         return $this->createdAt;
-    }
-
-    /**
-     * Set basket
-     *
-     * @param \AppBundle\Entity\Basket $basket
-     *
-     * @return Item
-     */
-    public function setBasket(\AppBundle\Entity\Basket $basket = null)
-    {
-        $this->basket = $basket;
-
-        return $this;
-    }
-
-    /**
-     * Get basket
-     *
-     * @return \AppBundle\Entity\Basket
-     */
-    public function getBasket()
-    {
-        return $this->basket;
     }
 }

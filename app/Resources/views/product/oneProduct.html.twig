@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+	{% for item in oneItem %}
+		{{ item.name }}
+		
+	{{ form_start(form) }}
+         {{ form_row(form.amount) }}
+         <button type="submit">Dodaj do koszyka!</button>
+    {{ form_end(form) }}
+    
+	{% endfor %}
+{% endblock %}
