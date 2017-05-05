@@ -5,6 +5,8 @@ namespace AppBundle\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use AppBundle\Form\SearchUserForm;
 
 class DefaultController extends Controller
 {
@@ -13,9 +15,46 @@ class DefaultController extends Controller
      */
     public function indexAction(Request $request)
     {
-        // replace this example code with whatever you need
-        return $this->render('default/index.html.twig', [
-            'base_dir' => realpath($this->getParameter('kernel.root_dir').'/..').DIRECTORY_SEPARATOR,
-        ]);
+    	$posts = $this->getDoctrine()->getManager()->createQueryBuilder()
+       	       ->select('u.body')
+        	   ->from('AppBundle:Post', 'u')
+        	   ->getQuery()
+        	   ->getResult();
+
+       	
+        return $this->render('default/index.html.twig',[
+			'posts' => $posts,
+		]);
+    }
+    
+
+    
+	 /**
+     * @Route("/profile", name="userprofile")
+     */
+    public function searchAction(Request $request)
+    {
+		$form = $this->createForm(SearchUserForm::class);
+		$form->handleRequest($request);
+		if($form->isValid() && $form->isSubmitted()){
+			
+			$username = $form->getData();
+			
+			if(isset($username)){
+				$searchUser = $this->getDoctrine()->getManager()->createQueryBuilder()
+					->select('p')
+					->from('AppBundle:User', 'p')
+					->where('p.username LIKE :username')
+					->setParameter('username', '%'.$username['_username'].'%')
+					->getQuery()
+					->getResult();	
+			}
+			
+		}
+    	
+		return $this->render('profile/userProfile.html.twig', [
+			'form' => $form->createView(),
+			'searchUser' => isset($searchUser) ? $searchUser : ' ',
+		]);
     }
 }

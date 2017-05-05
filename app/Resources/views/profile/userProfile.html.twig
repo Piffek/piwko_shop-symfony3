@@ -1,0 +1,11 @@
+
+{{ form_start(form) }}
+	{{ form_row(form._username) }}
+	<button type="submit">Wyszukaj!</button>
+{{ form_end(form) }}
+
+{% if(searchUser > 0) %}
+	{% for user in searchUser %}
+		{{ user.id }}
+	{% endfor %}
+{% endif %}
