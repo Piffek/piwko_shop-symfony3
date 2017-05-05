@@ -3,6 +3,10 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\ManyToMany;
+use Doctrine\ORM\Mapping\JoinColumn;
+use Doctrine\ORM\Mapping\JoinTable;
+use Doctrine\ORM\Mapping\OneToOne;
 
 /**
  * Item
@@ -77,18 +81,7 @@ class Item
      */
     private $createdAt;
     
-    /**
-     * 
-     * @ORM\OneToOne(targetEntity="User")
-     * @ORM\JoinColumn(name="userId", referencedColumnName="id")
-     */
-    private $user_id;
-    
-    /**
-     * 
-     * @var unknown
-     */
-    private $item_id;
+
 
 
     /**

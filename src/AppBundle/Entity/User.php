@@ -63,6 +63,13 @@ class User implements UserInterface, \Serializable
      * @ORM\Column(name="isActive", type="boolean")
      */
     private $isActive;
+    
+    /**
+     * 
+     * @ORM\ManyToMany(targetEntity="Item")
+     * @ORM\JoinTable(name="basket")
+     */
+    protected $basket;
 
     
     /**
@@ -74,6 +81,7 @@ class User implements UserInterface, \Serializable
     public function __construct()
     {
     	$this->isActive = true;
+    	$this->basket = new \Doctrine\Common\Collections\ArrayCollection();
     	$this->roles= new \Doctrine\Common\Collections\ArrayCollection();
     }
     
