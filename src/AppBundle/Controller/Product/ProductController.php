@@ -5,7 +5,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use AppBundle\Form\ProductToBasketFormType;
+use Symfony\Component\HttpFoundation\Session\Session;
 
 class ProductController extends Controller
 {
@@ -13,9 +13,11 @@ class ProductController extends Controller
 	 * @Route("/produkt/{id}", name="oneProduct")
 	 */
 	public function oneProductAction(Request $request, $id){
-		
+		$session = $request->getSession();
+		$session->start();
 		$em = $this->getDoctrine()->getRepository('AppBundle:Item');
 		$oneItem = $em->findById($id);
+
 		
 		$form = $this->createFormBuilder()
 		->add('amount')
@@ -24,11 +26,16 @@ class ProductController extends Controller
 		$form->handleRequest($request);
 		
 		if($form->isValid() && $form->isSubmitted()){
-			$itemToBasket = $form->getData();
-			$em = $this->getDoctrine()->getManager();
-			$em->
-			$em->persist($user);
-			$em->flush();
+			
+			foreach($oneItem as $items){
+				$amount = $form->getData();
+				$session->set('baskets',[
+						'name'=>$items->getName(),
+						'price'=>$items->getPrice(),
+						'amount'=>$amount['amount']
+				]);
+			}
+			
 			return $this->redirectToRoute('homepage');
 		}
 
