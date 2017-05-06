@@ -9,6 +9,7 @@
                           <th>Nazwa</th>
                           <th>Cena</th>
                           <th>Ilość</th>
+                          <th></th>
                       </tr>
                 </thead>
                 <tbody>
@@ -17,6 +18,7 @@
             		    <tr>
                         	<td>{{ itemLoggedinUser.item.name  }}</td>
                         	<td>{{ itemLoggedinUser.item.price  }}</td>
+                        	<td>{{ itemLoggedinUser.amount  }}</td>
                       	</tr>
                   	{% endfor %}
         	    {% else %}
@@ -25,11 +27,13 @@
                         	<td>{{ item.name }}</td>
                         	<td>{{ item.price }}</td>
                         	<td>{{ item.amount }}</td>
+                        	<a href="{{ path('deleteWithBasket', {'id':item.id})  }}">Usuń</a>
                       	</tr>
             		{% endfor %}
         	    {% endif %}
             	 </tbody>
                </table>
+               <button class="waves-effect waves-light btn-large">Zrealizuj</button>
         </div>
     </div>
 {% endblock %}

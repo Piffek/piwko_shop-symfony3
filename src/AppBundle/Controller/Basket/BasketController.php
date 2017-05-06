@@ -19,6 +19,7 @@ class BasketController extends Controller
 	public function indexAction(){
 
 		$securityContext = $this->container->get('security.authorization_checker');
+		
 		if($securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED')){
 			
 			$em = $this->getDoctrine()->getRepository('AppBundle:Basket');
@@ -29,10 +30,15 @@ class BasketController extends Controller
 			return $this->render('basket/index.html.twig', [
 					'basketLoggedinUser' => $basketLoggedinUser,
 			]);
-		}else {
-			return $this->render('basket/index.html.twig');
-		}
 		
+		}
+			return $this->render('basket/index.html.twig');
+	}
+	
+	/**
+	 * @Route("/deleteWithBasket", name="deleteWithBasket")
+	 */
+	public function deleteWitBasketAction(){
 		
 	}
 }

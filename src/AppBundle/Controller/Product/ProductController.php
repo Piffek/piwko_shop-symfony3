@@ -44,6 +44,7 @@ class ProductController extends Controller
 		foreach($oneItem as $items){
 			$amount = $form->getData();
 			$session->set('basket',[
+					'id' => $items->getId(),
 					'name'=>$items->getName(),
 					'price'=>$items->getPrice(),
 					'amount'=>$amount['amount'],
