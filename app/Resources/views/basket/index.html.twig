@@ -15,9 +15,8 @@
                 {% if is_granted('ROLE_USER') %}
                 	{% for itemLoggedinUser in basketLoggedinUser %}
             		    <tr>
-                        	<td>{{ itemLoggedinUser.id.getName  }}</td>
-                        	<td>User</td>
-                        	<td>User</td>
+                        	<td>{{ itemLoggedinUser.item.name  }}</td>
+                        	<td>{{ itemLoggedinUser.item.price  }}</td>
                       	</tr>
                   	{% endfor %}
         	    {% else %}

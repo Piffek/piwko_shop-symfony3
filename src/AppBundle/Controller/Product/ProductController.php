@@ -8,6 +8,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\Session;
 use AppBundle\Entity\Basket;
 
+
 class ProductController extends Controller
 {
 	/**

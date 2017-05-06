@@ -15,6 +15,7 @@ class DefaultController extends Controller
      */
     public function indexAction(Request $request)
     {
+    	
     	$posts = $this->getDoctrine()->getManager()->createQueryBuilder()
        	       ->select('u')
         	   ->from('AppBundle:Item', 'u')
