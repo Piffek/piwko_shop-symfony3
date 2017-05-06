@@ -7,8 +7,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\Session;
 use AppBundle\Entity\Basket;
-use AppBundle\Entity\Item;
-
+use Symfony\Component\HttpFoundation\RedirectResponse;
 
 
 class BasketController extends Controller
@@ -36,9 +35,33 @@ class BasketController extends Controller
 	}
 	
 	/**
-	 * @Route("/deleteWithBasket", name="deleteWithBasket")
+	 * @Route("/deleteWithBasket/{id}", name="deleteWithBasket")
 	 */
-	public function deleteWitBasketAction(){
+	public function deleteWitBasketAction(Request $request, $id){
+		$securityContext = $this->container->get('security.authorization_checker');
 		
+		if($securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED')){
+			
+			$em = $this->getDoctrine()->getManager();
+			$itemInBasket= $em->getRepository('AppBundle:Basket')->find($id);
+			
+			if (!$itemInBasket) {
+				throw $this->createNotFoundException(
+						'No basket found for id '.$id
+						);
+			}
+			$em->remove($itemInBasket);
+			$em->flush();
+			
+		}else{
+			$session = $request->getSession();
+			$session->start();
+			foreach($session->get('aBasket') as $unset){
+			 $session->remove($unset['id']);
+			}
+		}
+		return $this->redirect('/koszyk');
+		//return $this->render('basket/index.html.twig');
 	}
+
 }

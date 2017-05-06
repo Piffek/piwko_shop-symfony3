@@ -19,6 +19,7 @@
                         	<td>{{ itemLoggedinUser.item.name  }}</td>
                         	<td>{{ itemLoggedinUser.item.price  }}</td>
                         	<td>{{ itemLoggedinUser.amount  }}</td>
+                        	<td><a href="{{ path('deleteWithBasket', {'id':itemLoggedinUser.id})  }}">Usuń</a></td>
                       	</tr>
                   	{% endfor %}
         	    {% else %}
@@ -27,7 +28,7 @@
                         	<td>{{ item.name }}</td>
                         	<td>{{ item.price }}</td>
                         	<td>{{ item.amount }}</td>
-                        	<a href="{{ path('deleteWithBasket', {'id':item.id})  }}">Usuń</a>
+                        	<td><a href="{{ path('deleteWithBasket', {'id':item.id})  }}">Usuń</a></td>
                       	</tr>
             		{% endfor %}
         	    {% endif %}
