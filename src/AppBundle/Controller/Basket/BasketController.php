@@ -14,6 +14,19 @@ class BasketController extends Controller
 	 * @Route("/koszyk", name="basket")
 	 */
 	public function indexAction(){
-		return $this->render('basket/index.html.twig');
+		$securityContext = $this->container->get('security.authorization_checker');
+		if($securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED')){
+			
+			$em = $this->getDoctrine()->getRepository('AppBundle:Basket');
+			$basketLoggedinUser = $em->findByuser($this->getUser());
+			
+			return $this->render('basket/index.html.twig', [
+					'basketLoggedinUser' => $basketLoggedinUser,
+			]);
+		}else {
+			return $this->render('basket/index.html.twig');
+		}
+		
+		
 	}
 }

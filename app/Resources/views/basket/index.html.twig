@@ -13,11 +13,13 @@
                 </thead>
                 <tbody>
                 {% if is_granted('ROLE_USER') %}
-        		    <tr>
-                    	<td>User</td>
-                    	<td>User</td>
-                    	<td>User</td>
-                  	</tr>
+                	{% for itemLoggedinUser in basketLoggedinUser %}
+            		    <tr>
+                        	<td>{{ itemLoggedinUser.id.getName  }}</td>
+                        	<td>User</td>
+                        	<td>User</td>
+                      	</tr>
+                  	{% endfor %}
         	    {% else %}
             		{% for item in app.session.get('aBasket') %}
             			<tr>
