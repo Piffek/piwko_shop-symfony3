@@ -2,8 +2,4 @@ app:
     resource: '@AppBundle/Controller/'
     type: annotation
 
-app:
-    path: /koszyk
-    defaults:
-        _controller: AppBundle:BasketController:index
     
