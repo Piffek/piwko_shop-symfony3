@@ -34,7 +34,7 @@
         	    {% endif %}
             	 </tbody>
                </table>
-               <a href="{{ path('realizationOrder') }}"><button class="waves-effect waves-light btn-large">Zrealizuj</button></a>
+              <a href="{{ path('realizationOrder', {'amount':app.user.id}) }}"><button class="waves-effect waves-light btn-large">Zrealizuj</button></a>
         </div>
     </div>
 {% endblock %}
