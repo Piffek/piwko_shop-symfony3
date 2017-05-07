@@ -8,6 +8,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\Session;
 use AppBundle\Entity\Basket;
 
+
 class ProductController extends Controller
 {
 	/**
@@ -43,10 +44,12 @@ class ProductController extends Controller
 		foreach($oneItem as $items){
 			$amount = $form->getData();
 			$session->set('basket',[
+					'id' => $items->getId(),
 					'name'=>$items->getName(),
 					'price'=>$items->getPrice(),
 					'amount'=>$amount['amount'],
 			]);
+			
 			$sessionVal = $this->get('session')->get('aBasket');
 			$sessionVal[] = $session->get('basket');
 			$this->get('session')->set('aBasket', $sessionVal);

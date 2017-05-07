@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+	<div clas="row">
+        <div class="col s6">
+        	  <table>
+            	<thead>
+                      <tr>
+                          <th>Nazwa</th>
+                          <th>Cena</th>
+                          <th>Ilość</th>
+                          <th></th>
+                      </tr>
+                </thead>
+                <tbody>
+                {% if is_granted('ROLE_USER') %}
+                	{% for itemLoggedinUser in basketLoggedinUser %}
+            		    <tr>
+                        	<td>{{ itemLoggedinUser.item.name  }}</td>
+                        	<td>{{ itemLoggedinUser.item.price  }}</td>
+                        	<td>{{ itemLoggedinUser.amount  }}</td>
+                        	<td><a href="{{ path('deleteWithBasket', {'id':itemLoggedinUser.id})  }}">Usuń</a></td>
+                      	</tr>
+                  	{% endfor %}
+        	    {% else %}
+            		{% for item in app.session.get('aBasket') %}
+            			<tr>
+                        	<td>{{ item.name }}</td>
+                        	<td>{{ item.price }}</td>
+                        	<td>{{ item.amount }}</td>
+                        	<td><a href="{{ path('deleteWithBasket', {'id':item.id})  }}">Usuń</a></td>
+                      	</tr>
+            		{% endfor %}
+        	    {% endif %}
+            	 </tbody>
+               </table>
+               <button class="waves-effect waves-light btn-large">Zrealizuj</button>
+        </div>
+    </div>
+{% endblock %}
