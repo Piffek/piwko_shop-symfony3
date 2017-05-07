@@ -42,7 +42,7 @@ class OrdersController extends Controller
 	{
 		$config = [
 				'paypal_express_checkout' => [
-						'return_url' => 'https://example.com/return-url',
+						'return_url' => 'http://localhost:8000',
 						'cancel_url' => 'https://example.com/cancel-url',
 						'useraction' => 'commit',
 				],
@@ -50,8 +50,8 @@ class OrdersController extends Controller
 		];
 		
 		$form = $this->createForm(ChoosePaymentMethodType::class, null, [
-				'amount'          => 10.00,
-				'currency'        => 'Zł',
+				'amount'          => 1.00,
+				'currency'        => 'EUR',
 				'predefined_data' => $config,
 		]);
 		
