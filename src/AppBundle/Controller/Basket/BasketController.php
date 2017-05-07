@@ -56,12 +56,18 @@ class BasketController extends Controller
 		}else{
 			$session = $request->getSession();
 			$session->start();
-			foreach($session->get('aBasket') as $unset){
-			 $session->remove($unset['id']);
+			$ses = $session->get('aBasket');
+
+			foreach($ses as $key => $service){
+
+				if($service['id'] == $id){
+					unset($ses[$key]);
+				}
 			}
 		}
+		$session->set('aBasket', $ses);
 		return $this->redirect('/koszyk');
-		//return $this->render('basket/index.html.twig');
+
 	}
 
 }
