@@ -42,32 +42,41 @@ class BasketController extends Controller
 		
 		if($securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED')){
 			
-			$em = $this->getDoctrine()->getManager();
-			$itemInBasket= $em->getRepository('AppBundle:Basket')->find($id);
-			
-			if (!$itemInBasket) {
-				throw $this->createNotFoundException(
-						'No basket found for id '.$id
-						);
-			}
-			$em->remove($itemInBasket);
-			$em->flush();
+			$this->deleteIfUserIsLoggin($id);
 			
 		}else{
-			$session = $request->getSession();
-			$session->start();
-			$ses = $session->get('aBasket');
+			
+			$this->deleteIfUserIdNotLoggin($request,$id);
+		}
+		return $this->redirect('/koszyk');
 
-			foreach($ses as $key => $service){
-
-				if($service['id'] == $id){
-					unset($ses[$key]);
-				}
+	}
+	
+	public function deleteIfUserIsLoggin($id){
+		$em = $this->getDoctrine()->getManager();
+		$itemInBasket= $em->getRepository('AppBundle:Basket')->find($id);
+		
+		if (!$itemInBasket) {
+			throw $this->createNotFoundException(
+					'No basket found for id '.$id
+					);
+		}
+		$em->remove($itemInBasket);
+		$em->flush();
+	}
+	
+	public function deleteIfUserIdNotLoggin($request,$id){
+		$session = $request->getSession();
+		$session->start();
+		$ses = $session->get('aBasket');
+		
+		foreach($ses as $key => $service){
+			
+			if($service['id'] == $id){
+				unset($ses[$key]);
 			}
 		}
 		$session->set('aBasket', $ses);
-		return $this->redirect('/koszyk');
-
 	}
 
 }
