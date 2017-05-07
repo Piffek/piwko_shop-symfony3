@@ -58,8 +58,7 @@ class BasketController extends Controller
 		
 		if (!$itemInBasket) {
 			throw $this->createNotFoundException(
-					'No basket found for id '.$id
-					);
+					'No basket found for id '.$id);
 		}
 		$em->remove($itemInBasket);
 		$em->flush();

@@ -7,9 +7,11 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use AppBundle\Entity\Order;
 use JMS\Payment\CoreBundle\Form\ChoosePaymentMethodType;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use JMS\Payment\CoreBundle\Plugin\Exception\Action\VisitUrl;
 use JMS\Payment\CoreBundle\Plugin\Exception\ActionRequiredException;
 use JMS\Payment\CoreBundle\PluginController\Result;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 
 /**
  * @Route("/orders")
@@ -27,19 +29,30 @@ class OrdersController extends Controller
 		$em->persist($order);
 		$em->flush();
 	
-		return $this->redirect($this->generateUrl('/1/show', [
+		return $this->redirect($this->generateUrl('app_orders_show', [
 				'id' => $order->getId(),
 		]));
 	}
 	
 	/**
-	 * @Route("/{id}/show")
+	 * @Route("/{id}/show", name="app_orders_show")
+	 * @Template
 	 */
 	public function showAction(Request $request, Order $order)
 	{
+		$config = [
+				'paypal_express_checkout' => [
+						'return_url' => 'https://example.com/return-url',
+						'cancel_url' => 'https://example.com/cancel-url',
+						'useraction' => 'commit',
+				],
+
+		];
+		
 		$form = $this->createForm(ChoosePaymentMethodType::class, null, [
-				'amount'   => $order->getAmount(),
-				'currency' => 'EUR',
+				'amount'          => 10.00,
+				'currency'        => 'Zł',
+				'predefined_data' => $config,
 		]);
 		
 		$form->handleRequest($request);
@@ -82,7 +95,7 @@ class OrdersController extends Controller
 	}
 	
 	/**
-	 * @Route("/{id}/payment/create")
+	 * @Route("/{id}/payment/create", name="app_orders_paymentcreate")
 	 */
 	public function paymentCreateAction(Order $order)
 	{
@@ -115,7 +128,7 @@ class OrdersController extends Controller
 	
 	
 	/**
-	 * @Route("/{id}/payment/complete")
+	 * @Route("/{id}/payment/complete", name="app_orders_paymentcomplete")
 	 */
 	public function paymentCompleteAction(Order $order)
 	{
