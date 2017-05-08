@@ -1,7 +1,10 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-	{% for item in basketCurrentUser %}
-		{{ item.item.name }}
+	{% for item in buying %}
+		{{ item.product }}
+		{{ item.price }}
+		{{ item.amount }}
+		{{ item.created_at }}
 	{% endfor %}
 {% endblock %}

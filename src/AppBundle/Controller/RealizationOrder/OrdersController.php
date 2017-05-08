@@ -41,15 +41,21 @@ class OrdersController extends Controller
 			
 			$buying = new Buying();
 			$buying->setProduct($item->getItem()->getName());
-			$buying->setPrice($item->getItem()->getPrice());
-			$buying->setAmount($item->getItem()->getAmount());
+			$buying->setPrice($item->getItem()->getPrice()*$item->getAmount());
+			$buying->setAmount($item->getAmount());
+			$buying->setUsername($this->getUser()->getName());
+			$buying->setCity($this->getUser()->getCity());
+			$buying->setStreet($this->getUser()->getStreet());
 			
 			$em->persist($buying);
+			$em->remove($item);
 			$em->flush();
 		}
+		//$em->remove($basketCurrentUser);
+		//$em->flush();
 		
 		return $this->render('realizationOrder/history.html.twig', [
-			'basketCurrentUser' => $basketCurrentUser
+			'buying' => $buying
 		]);
 	}
 	

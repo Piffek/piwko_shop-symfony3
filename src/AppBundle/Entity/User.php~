@@ -34,7 +34,28 @@ class User implements UserInterface, \Serializable
      * @ORM\Column(name="username", type="string", length=255)
      */
     private $username;
+	
+	
+	 /**
+     * @var string
+     *
+     * @ORM\Column(name="name", type="string", length=255)
+     */
+    private $name;
+	
+	 /**
+     * @var string
+     *
+     * @ORM\Column(name="city", type="string", length=255)
+     */
+    private $city;
 
+	/**
+     * @var string
+     *
+     * @ORM\Column(name="street", type="string", length=255)
+     */
+    private $street;
     
     
     /**
@@ -64,16 +85,16 @@ class User implements UserInterface, \Serializable
      */
     private $isActive;
     
-    /*
-     * @ORM\OneToMany(targetEntity="Basket")
+    /**
+     * @ORM\OneToMany(targetEntity="Basket", mappedBy="user")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
     protected $basket;
 
     
     /**
-     * One Customer has One Cart.
-     * @ORM\OneToOne(targetEntity="Basket", mappedBy="User")
+     * @ORM\ManyToMany(targetEntity="Role")
+     * @ORM\JoinTable(name="security_users_roles")
      */
     protected $roles;
 
