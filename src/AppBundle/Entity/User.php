@@ -34,7 +34,28 @@ class User implements UserInterface, \Serializable
      * @ORM\Column(name="username", type="string", length=255)
      */
     private $username;
+	
+	
+	 /**
+     * @var string
+     *
+     * @ORM\Column(name="name", type="string", length=255)
+     */
+    private $name;
+	
+	 /**
+     * @var string
+     *
+     * @ORM\Column(name="city", type="string", length=255)
+     */
+    private $city;
 
+	/**
+     * @var string
+     *
+     * @ORM\Column(name="street", type="string", length=255)
+     */
+    private $street;
     
     
     /**

@@ -19,7 +19,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 class PayPallOrdersController extends Controller
 {
 	/**
-	 * @Route("/new/{amount}", name="realizationOrder")
+	 * @Route("/new/{amount}", name="realizationByPayPall")
 	 */
 	public function newAction($amount){
 		

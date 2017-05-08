@@ -24,8 +24,9 @@
                         	<td><a href="{{ path('deleteWithBasket', {'id':itemLoggedinUser.id})  }}">Usuń</a></td>
                       	</tr>
                   	{% endfor %}
-					<a href="{{ path('realizationOrder', {'amount':sum}) }}"><button class="waves-effect waves-light btn-large">Zrealizuj</button></a>
-        	    {% else %}
+					<a href="{{ path('realizationOrder')}}"><button class="waves-effect waves-light btn-large">Zrealizuj</button></a>
+					<a href="{{ path('realizationByPayPall', {'amount':sum}) }}"><button class="waves-effect waves-light btn-large">PayPall</button></a>
+			  {% else %}
             		{% for item in app.session.get('aBasket') %}
             			<tr>
                         	<td>{{ item.name }}</td>

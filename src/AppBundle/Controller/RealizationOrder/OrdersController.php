@@ -12,32 +12,47 @@ use JMS\Payment\CoreBundle\Plugin\Exception\Action\VisitUrl;
 use JMS\Payment\CoreBundle\Plugin\Exception\ActionRequiredException;
 use JMS\Payment\CoreBundle\PluginController\Result;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use AppBundle\Entity\Buying;
 
 /**
- * @Route("/orders")
+ * @Route("/zamowienie")
  */
 class OrdersController extends Controller
 {
 	/**
-	 * @Route("/metody_platnosci", name="realizationByPayPallOrder")
+	 * @Route("/realizuj", name="realizationOrder")
 	 */
-	public function OrderAction($amount){
+	public function acceptDataAction(){
 		
-		$em = $this->getDoctrine()->getManager();
-		
-		$order = new Order($amount);
-		$em->persist($order);
-		$em->flush();
-	
-		return $this->redirect($this->generateUrl('app_orders_show', [
-				'id' => $order->getId(),
-		]));
+		$dataCurrentUser = $this->getUser();
+		return $this->render('realizationOrder/acceptData.html.twig',[
+			'dataCurrentUser' => $dataCurrentUser,
+		]);
 	}
 	
 	/**
-	 * @Route("/{id}/show", name="app_orders_show")
-	 * @Template
+	 * @Route("/historiaZakupow", name="history")
 	 */
+	public function showHistoryAction(){
+		
+		$em = $this->getDoctrine()->getManager();
+		$basketCurrentUser= $em->getRepository('AppBundle:Basket')->findByUser($this->getUser());
+		foreach($basketCurrentUser as $item){
+			
+			$buying = new Buying();
+			$buying->setProduct($item->getItem()->getName());
+			$buying->setPrice($item->getItem()->getPrice());
+			$buying->setAmount($item->getItem()->getAmount());
+			
+			$em->persist($buying);
+			$em->flush();
+		}
+		
+		return $this->render('realizationOrder/history.html.twig', [
+			'basketCurrentUser' => $basketCurrentUser
+		]);
+	}
+	
 	
 	
 	
