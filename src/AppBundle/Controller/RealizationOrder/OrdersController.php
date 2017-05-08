@@ -4,15 +4,10 @@ namespace AppBundle\Controller\RealizationOrder;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use AppBundle\Entity\Order;
-use JMS\Payment\CoreBundle\Form\ChoosePaymentMethodType;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
-use JMS\Payment\CoreBundle\Plugin\Exception\Action\VisitUrl;
-use JMS\Payment\CoreBundle\Plugin\Exception\ActionRequiredException;
-use JMS\Payment\CoreBundle\PluginController\Result;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use AppBundle\Entity\Buying;
+use AppBundle\Form\RealizationBuyingFormType;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Session\Session;
 
 /**
  * @Route("/zamowienie")
@@ -22,18 +17,43 @@ class OrdersController extends Controller
 	/**
 	 * @Route("/realizuj", name="realizationOrder")
 	 */
-	public function acceptDataAction(){
+	public function acceptDataAction(Request $request){
 		
-		$dataCurrentUser = $this->getUser();
-		return $this->render('realizationOrder/acceptData.html.twig',[
-			'dataCurrentUser' => $dataCurrentUser,
-		]);
+
+		$session = $request->getSession();
+		$session->start();
+		$form = $this->createForm(RealizationBuyingFormType::class);
+	
+		$form->handleRequest($request);
+		if($form->isValid() && $form->isSubmitted()){
+			
+			foreach ($session->get('aBasket') as $itemInBasket){
+				$dataFromForm = $form->getData();
+				$buying = new Buying();
+				$buying->setProduct($itemInBasket['name']);
+				$buying->setPrice($itemInBasket['price'] * $itemInBasket['amount']);
+				$buying->setAmount($itemInBasket['amount']);
+				$buying->setUserName($dataFromForm['name']);
+				$buying->setCity($dataFromForm['city']);
+				$buying->setStreet($dataFromForm['street']);
+				$em = $this->getDoctrine()->getManager();
+				$em->persist($buying);
+				$em->flush();
+			}
+			//$session->remove('aBasket');
+			return $this->redirectToRoute('homepage');
+
+		}
+		
+		return $this->render('realizationOrder/acceptData.html.twig', array(
+				'form' => $form->createView()
+		));
 	}
 	
 	/**
 	 * @Route("/historiaZakupow", name="history")
 	 */
-	public function showHistoryAction(){
+	public function showHistoryAction(Request $request){
 		
 		$securityContext = $this->container->get('security.authorization_checker');
 		
@@ -60,9 +80,8 @@ class OrdersController extends Controller
 			return $this->render('realizationOrder/history.html.twig', [
 					'buyingByCurrentUser' => $buyingByCurrentUser
 			]);
-		}else{
-			
 		}
+			
 	}
 	
 	

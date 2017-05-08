@@ -6,8 +6,14 @@
 		{{ app.user.name}}
 		{{ app.user.city}}
 		{{ app.user.street}}
+		<td><a href="{{ path('history')}}">Zrealizuj</a></td>
 	{% else %}
-		Dane usera niezalogowanego
+		{{ form_start(form) }}
+			{{ form_row(form.name) }}
+			{{ form_row(form.email) }}
+			{{ form_row(form.street) }}
+			{{ form_row(form.city) }}
+			<button type="submit">Zrealizuj</button>
+		{{ form_end(form) }}
 	{% endif %}
-	<td><a href="{{ path('history')}}">REALIZUJ</a></td>
 {% endblock %}

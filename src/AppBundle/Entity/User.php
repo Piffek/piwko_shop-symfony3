@@ -93,24 +93,25 @@ class User implements UserInterface, \Serializable
     
     
     /**
-     * 
+     * @ORM\ManyToMany(targetEntity="Role")
+     * @ORM\JoinTable(name="security_users_roles")
+     */
+    protected $roles;
+    
+    
+    /**
+     *
      * @var unknown
      * @ORM\OneToMany(targetEntity="Buying", mappedBy="user")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
     protected $buying;
 
-    
-    /**
-     * @ORM\ManyToMany(targetEntity="Role")
-     * @ORM\JoinTable(name="security_users_roles")
-     */
-    protected $roles;
-
     public function __construct()
     {
     	$this->isActive = true;
     	$this->roles= new \Doctrine\Common\Collections\ArrayCollection();
+    	$this->buying= new \Doctrine\Common\Collections\ArrayCollection();
     }
     
     
@@ -453,5 +454,39 @@ class User implements UserInterface, \Serializable
     public function getStreet()
     {
         return $this->street;
+    }
+
+    /**
+     * Add buying
+     *
+     * @param \AppBundle\Entity\Buying $buying
+     *
+     * @return User
+     */
+    public function addBuying(\AppBundle\Entity\Buying $buying)
+    {
+        $this->buying[] = $buying;
+
+        return $this;
+    }
+
+    /**
+     * Remove buying
+     *
+     * @param \AppBundle\Entity\Buying $buying
+     */
+    public function removeBuying(\AppBundle\Entity\Buying $buying)
+    {
+        $this->buying->removeElement($buying);
+    }
+
+    /**
+     * Get buying
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getBuying()
+    {
+        return $this->buying;
     }
 }

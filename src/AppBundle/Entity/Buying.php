@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Buying
@@ -86,16 +87,16 @@ class Buying
     
     
     /**
-     * 
+     *
      * @var unknown
-     * 
+     * @Assert\Blank()
      * @ORM\ManyToOne(targetEntity="User", inversedBy="buying")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
     protected $user;
     
     public function __construct(){
-    	$this->user= new \Doctrine\Common\Collections\ArrayCollection();
+    	//$this->user= new \Doctrine\Common\Collections\ArrayCollection();
     }
 
 
