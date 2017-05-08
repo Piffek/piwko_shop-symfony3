@@ -1,8 +1,11 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-	{{ app.user.username}}<br>
-	{{ app.user.email}}
+    {% if is_granted('ROLE_USER') %}
+		{{ app.user.username}}<br>
+		{{ app.user.email}}
+	{% else %}
 	
+	{% endif %}
 	<td><a href="{{ path('history')}}">REALIZUJ</a></td>
 {% endblock %}

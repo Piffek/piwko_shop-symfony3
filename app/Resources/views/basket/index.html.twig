@@ -13,8 +13,8 @@
                       </tr>
                 </thead>
                 <tbody>
-                {% if is_granted('ROLE_USER') %}
 				{% set sum = 0 %}
+                {% if is_granted('ROLE_USER') %}
                 	{% for itemLoggedinUser in basketLoggedinUser %}
             		    <tr>
                         	<td>{{ itemLoggedinUser.item.name  }}</td>
@@ -32,10 +32,12 @@
                         	<td>{{ item.name }}</td>
                         	<td>{{ item.price }}</td>
                         	<td>{{ item.amount }}</td>
+							{% set sum = sum + item.amount%}
                         	<td><a href="{{ path('deleteWithBasket', {'id':item.id})  }}">Usuń</a></td>
                       	</tr>
             		{% endfor %}
-					 <a href="{{ path('realizationOrder', {'amount':app.user.id}) }}"><button class="waves-effect waves-light btn-large">Zrealizuj</button></a>
+					<a href="{{ path('realizationByPayPall', {'amount':sum}) }}"><button class="waves-effect waves-light btn-large">PayPall</button></a>
+					<a href="{{ path('realizationOrder')}}"><button class="waves-effect waves-light btn-large">Zrealizuj</button></a>
         	    {% endif %}
             	 </tbody>
                </table>
