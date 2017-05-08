@@ -70,7 +70,7 @@ class Item
     /**
      * @var int
      *
-     * @ORM\Column(name="buyAmount", type="integer")
+     * @ORM\Column(name="buyAmount", type="integer", nullable=true))
      */
     private $buyAmount;
 
