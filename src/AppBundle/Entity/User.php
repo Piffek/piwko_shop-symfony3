@@ -90,6 +90,15 @@ class User implements UserInterface, \Serializable
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
     protected $basket;
+    
+    
+    /**
+     * 
+     * @var unknown
+     * @ORM\OneToMany(targetEntity="Buying", mappedBy="user")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     */
+    protected $buying;
 
     
     /**

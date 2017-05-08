@@ -35,28 +35,34 @@ class OrdersController extends Controller
 	 */
 	public function showHistoryAction(){
 		
-		$em = $this->getDoctrine()->getManager();
-		$basketCurrentUser= $em->getRepository('AppBundle:Basket')->findByUser($this->getUser());
-		foreach($basketCurrentUser as $item){
-			
-			$buying = new Buying();
-			$buying->setProduct($item->getItem()->getName());
-			$buying->setPrice($item->getItem()->getPrice()*$item->getAmount());
-			$buying->setAmount($item->getAmount());
-			$buying->setUsername($this->getUser()->getName());
-			$buying->setCity($this->getUser()->getCity());
-			$buying->setStreet($this->getUser()->getStreet());
-			
-			$em->persist($buying);
-			$em->remove($item);
-			$em->flush();
-		}
-		//$em->remove($basketCurrentUser);
-		//$em->flush();
+		$securityContext = $this->container->get('security.authorization_checker');
 		
-		return $this->render('realizationOrder/history.html.twig', [
-			'buying' => $buying
-		]);
+		if($securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED')){
+			$em = $this->getDoctrine()->getManager();
+			$basketCurrentUser= $em->getRepository('AppBundle:Basket')->findByUser($this->getUser());
+			foreach($basketCurrentUser as $item){
+				
+				$buying = new Buying();
+				$buying->setProduct($item->getItem()->getName());
+				$buying->setPrice($item->getItem()->getPrice()*$item->getAmount());
+				$buying->setAmount($item->getAmount());
+				$buying->setUsername($this->getUser()->getName());
+				$buying->setCity($this->getUser()->getCity());
+				$buying->setStreet($this->getUser()->getStreet());
+				$buying->setUser($this->getDoctrine()->getRepository('AppBundle:User')->find($this->getUser()));
+				
+				$em->persist($buying);
+				$em->remove($item);
+				$em->flush();
+			}
+			
+			$buyingByCurrentUser= $em->getRepository('AppBundle:Buying')->findByUser($this->getUser());
+			return $this->render('realizationOrder/history.html.twig', [
+					'buyingByCurrentUser' => $buyingByCurrentUser
+			]);
+		}else{
+			
+		}
 	}
 	
 	

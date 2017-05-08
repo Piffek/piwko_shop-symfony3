@@ -83,6 +83,20 @@ class Buying
      * @ORM\Column(name="created_at", type="datetime",  nullable=true)
      */
     private $createdAt;
+    
+    
+    /**
+     * 
+     * @var unknown
+     * 
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="buying")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     */
+    protected $user;
+    
+    public function __construct(){
+    	$this->user= new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
 
     /**
@@ -309,5 +323,29 @@ class Buying
     public function getCreatedAt()
     {
         return $this->createdAt;
+    }
+
+    /**
+     * Set user
+     *
+     * @param \AppBundle\Entity\User $user
+     *
+     * @return Buying
+     */
+    public function setUser(\AppBundle\Entity\User $user = null)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \AppBundle\Entity\User
+     */
+    public function getUser()
+    {
+        return $this->user;
     }
 }

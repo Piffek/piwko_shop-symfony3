@@ -3,7 +3,9 @@
 {% block body %}
     {% if is_granted('ROLE_USER') %}
 		{{ app.user.username}}<br>
-		{{ app.user.email}}
+		{{ app.user.name}}
+		{{ app.user.city}}
+		{{ app.user.street}}
 	{% else %}
 		Dane usera niezalogowanego
 	{% endif %}

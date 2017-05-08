@@ -45,44 +45,54 @@ class Buying
     /**
      * @var string
      *
-     * @ORM\Column(name="username", type="string", length=255)
+     * @ORM\Column(name="username", type="string", length=255,  nullable=true)
      */
     private $username;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="street", type="string", length=255)
+     * @ORM\Column(name="street", type="string", length=255,  nullable=true)
      */
     private $street;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="city", type="string", length=255)
+     * @ORM\Column(name="city", type="string", length=255,  nullable=true)
      */
     private $city;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="delivery", type="string", length=255)
+     * @ORM\Column(name="delivery", type="string", length=255,  nullable=true)
      */
     private $delivery;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="payment", type="string", length=255)
+     * @ORM\Column(name="payment", type="string", length=255,  nullable=true)
      */
     private $payment;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="created_at", type="datetime")
+     * @ORM\Column(name="created_at", type="datetime",  nullable=true)
      */
     private $createdAt;
+    
+    
+    /**
+     * 
+     * @var unknown
+     * 
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="buying")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     */
+    protected $user;
 
 
     /**
