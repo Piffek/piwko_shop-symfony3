@@ -33,7 +33,7 @@ class DeliveryDataController extends Controller
 			 return $this->redirectToRoute('addDataDelivery');
 		 }
 		 $dataDeliveryCurrentUser= $em->getRepository('AppBundle:otherDeliveryData')->findByUser($this->getUser());
-		 return $this->render('dataCustomer\addOtherDataDelivery.html.twig', [
+		 return $this->render('otherDeliveryCustomer\addOtherDataDelivery.html.twig', [
 			'form'=>$form->createView(),
 			'dataDeliveryCurrentUser' => $dataDeliveryCurrentUser,
 		 ]);

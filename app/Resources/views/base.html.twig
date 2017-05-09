@@ -20,7 +20,7 @@
           <div class="col s12">
             {% if is_granted('ROLE_USER') %}
                 <a href="{{ path('logout') }}">Wyloguj</a> | 
-				<a href="{{ path('changeData') }}">Zmień dane</a> | 
+				<a href="{{ path('changeData', {id:app.user.id}) }}">Zmień dane</a> | 
 				<a href="{{ path('addDataDelivery') }}">Dodaj dane dostawy</a> | 
             {% else %}
                 <a href="{{ path('login') }}">Zaloguj</a>
