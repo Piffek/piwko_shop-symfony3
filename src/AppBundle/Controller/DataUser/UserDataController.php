@@ -14,21 +14,22 @@ class UserDataController extends Controller
     /**
      * @Route("/zmienDane/{id}/edit", name="changeData")
      */
-	 public function changeUserDataAction(Request $request, User $user){
+	 public function changeUserDataAction(Request $request, $id){
 	 	
-
+	 	$em = $this->getDoctrine()->getManager();
+	 	$userData = $em->getRepository('AppBundle:User')->find($id);
 	 	
-	 	$form = $this->createForm(EditCustomerDataForm::class, $user);
+	 	
+	 	$form = $this->createForm(EditCustomerDataForm::class, $userData);
 	 	
 	 	$form->handleRequest($request);
 	 	
 	 	if($form->isValid() && $form->isSubmitted()){
-	 		$user = $form->getData();
-	 		$em = $this->getDoctrine()->getManager();
-	 		$em->persist($user);
+	 		
+	 		$em->persist($userData);
 	 		$em->flush();
 	 		
-	 		return $this->redirectToRoute('admin_genus_list');
+	 		//return $this->redirectToRoute('changeData');
 	 	}
 	 	
 	 	

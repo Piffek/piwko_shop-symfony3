@@ -15,19 +15,11 @@ class EditCustomerDataForm extends AbstractType
 	public function buildForm(FormBuilderInterface $builder, array $options)
 	{
 		$builder
-		->add('username', TextType::class)
-		->add('email', EmailType::class)
 		->add('name', TextType::class)
 		->add('city', TextType::class)
-		->add('street', TextType::class)
-		->add('password', PasswordType::class);
+		->add('street', TextType::class);
 	}
-	public function configureOptions(OptionsResolver $resolver)
-	{
-		$resolver->setDefaults([
-				'data_class' => User::class
-		]);
-	}
+
 }
 
 
