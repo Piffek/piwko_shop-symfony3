@@ -5,10 +5,10 @@ namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * otherDeliveryData
+ * OtherDeliveryData
  *
  * @ORM\Table(name="other_delivery_data")
- * @ORM\Entity(repositoryClass="AppBundle\Repository\otherDeliveryDataRepository")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\OtherDeliveryDataRepository")
  */
 class OtherDeliveryData
 {

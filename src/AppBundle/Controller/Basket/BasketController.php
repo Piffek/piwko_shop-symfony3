@@ -37,7 +37,7 @@ class BasketController extends Controller
 	/**
 	 * @Route("/deleteWithBasket/{id}", name="deleteWithBasket")
 	 */
-	public function deleteWitBasketAction(Request $request, $id){
+	public function deleteWithBasketAction(Request $request, $id){
 		$securityContext = $this->container->get('security.authorization_checker');
 		
 		if($securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED')){

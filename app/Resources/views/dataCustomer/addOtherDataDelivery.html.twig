@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+Twoje nowe dane dostawy
+	{{ form_start(form) }}
+		{{ form_row(form.name) }}
+		{{ form_row(form.city) }}
+		{{ form_row(form.street) }}
+		{{ form_row(form.email) }}
+		<button type="submit">Dodaj</button>
+	{{ form_end(form) }}
+	
+	Twoje dodane dane dostawy<br>
+	{% for data in dataDeliveryCurrentUser %}
+		{{ data.city }}<br>
+		{{ data.street}}<br>
+		{{ data.name }}<br>
+		<a href="{{ path('deleteDataDelivery', {'id': data.id }) }}">Usuń</a> | 
+		<hr>
+	{% endfor %}
+{% endblock %}

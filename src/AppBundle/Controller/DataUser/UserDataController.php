@@ -1,34 +1,24 @@
 <?php
 
-namespace AppBundle\Controller\Data;
+namespace AppBundle\Controller\DataUser;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use AppBundle\Form\UserDataFormType;
+use AppBundle\Entity\OtherDeliveryData;
 
-class UserAndDeliveryDataController extends Controller
+class UserDataController extends Controller
 {
     /**
      * @Route("/zmienDane", name="changeData")
      */
 	 public function changeUserDataAction(){
 		 
-		 $form = $this->createForm(UserDataFormType::class);
-		 
-		 $form->handlerRequest($request);
-		 
-		 if($form->isValid() && $form->idSubmitted()){
-			 
-		 }
+
 	 }
 	 
-	 /**
-     * @Route("/dodajDaneDostawy", name="addDataDelivery")
-     */
-	 public function addDeliveryDataAction(){
-		 
-	 }
+
 	 
 }
