@@ -106,12 +106,20 @@ class User implements UserInterface, \Serializable
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
     protected $buying;
+	
+	/**
+	*
+	*@ORM\OneToMany(targetEntity="OtherDeliveryData", mappedBy="user")
+	*@ORM\JoinColumn(name="user_id", referencedColumnName="id")
+	*/
+	protected $deliveryData;
 
     public function __construct()
     {
     	$this->isActive = true;
     	$this->roles= new \Doctrine\Common\Collections\ArrayCollection();
     	$this->buying= new \Doctrine\Common\Collections\ArrayCollection();
+		$this->deliveryData= new \Doctrine\Common\Collections\ArrayCollection();
     }
     
     
