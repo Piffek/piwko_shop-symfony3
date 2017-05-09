@@ -9,7 +9,7 @@ use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 
-class RealizationBuyingFormType extends AbstractType
+class UserDataFormType extends AbstractType
 {
 	public function buildForm(FormBuilderInterface $builder, array $options)
 	{

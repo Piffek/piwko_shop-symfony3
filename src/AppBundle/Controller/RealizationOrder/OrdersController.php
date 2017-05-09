@@ -5,7 +5,7 @@ namespace AppBundle\Controller\RealizationOrder;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use AppBundle\Entity\Buying;
-use AppBundle\Form\RealizationBuyingFormType;
+use AppBundle\Form\UserDataFormType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\Session;
 
@@ -22,7 +22,7 @@ class OrdersController extends Controller
 
 		$session = $request->getSession();
 		$session->start();
-		$form = $this->createForm(RealizationBuyingFormType::class);
+		$form = $this->createForm(UserDataFormType::class);
 	
 		$form->handleRequest($request);
 		if($form->isValid() && $form->isSubmitted()){
