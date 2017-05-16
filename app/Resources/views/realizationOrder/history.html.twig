@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+	{% for item in buyingByCurrentUser %}
+		{{ item.product }}<br>
+		{{ item.price }}<br>
+		{{ item.amount }}<br>
+		{{ item.user.name }}<br>
+		{{ item.user.city }}<br>
+		{{ item.user.street }}<br>
+		<hr>
+	{% endfor %}
+{% endblock %}

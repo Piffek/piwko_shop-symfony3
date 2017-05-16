@@ -18,7 +18,6 @@ class BasketController extends Controller
 	public function indexAction(){
 
 		$securityContext = $this->container->get('security.authorization_checker');
-		
 		if($securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED')){
 			
 			$em = $this->getDoctrine()->getRepository('AppBundle:Basket');
@@ -31,13 +30,14 @@ class BasketController extends Controller
 			]);
 		
 		}
+
 			return $this->render('basket/index.html.twig');
 	}
 	
 	/**
 	 * @Route("/deleteWithBasket/{id}", name="deleteWithBasket")
 	 */
-	public function deleteWitBasketAction(Request $request, $id){
+	public function deleteWithBasketAction(Request $request, $id){
 		$securityContext = $this->container->get('security.authorization_checker');
 		
 		if($securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED')){
@@ -58,8 +58,7 @@ class BasketController extends Controller
 		
 		if (!$itemInBasket) {
 			throw $this->createNotFoundException(
-					'No basket found for id '.$id
-					);
+					'No basket found for id '.$id);
 		}
 		$em->remove($itemInBasket);
 		$em->flush();

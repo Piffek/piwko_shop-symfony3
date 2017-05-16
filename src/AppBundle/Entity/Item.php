@@ -70,7 +70,7 @@ class Item
     /**
      * @var int
      *
-     * @ORM\Column(name="buyAmount", type="integer")
+     * @ORM\Column(name="buyAmount", type="integer", nullable=true))
      */
     private $buyAmount;
 
@@ -311,5 +311,36 @@ class Item
     public function getBasket()
     {
         return $this->basket;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->basket = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add basket
+     *
+     * @param \AppBundle\Entity\Basket $basket
+     *
+     * @return Item
+     */
+    public function addBasket(\AppBundle\Entity\Basket $basket)
+    {
+        $this->basket[] = $basket;
+
+        return $this;
+    }
+
+    /**
+     * Remove basket
+     *
+     * @param \AppBundle\Entity\Basket $basket
+     */
+    public function removeBasket(\AppBundle\Entity\Basket $basket)
+    {
+        $this->basket->removeElement($basket);
     }
 }

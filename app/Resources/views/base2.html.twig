@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+{% include 'head.html' %}
+{% include 'menuTopTop.html' %}
+
+<div id="outer">
+	<div id="outer-canvas">
+		<!-- Navbar -->
+		    	<header>
+    		{% include 'search.html' %}
+    		<div id="newsLine">
+			<div class="container">
+				<div class="row">
+            {% include 'navbarLine.html' %}
+					<div class="col-xs-5 col-sm-3 col-md-2 top-link pull-right">
+						<div class="btn-outer btn-search">
+							<a href="#" class="btn btn-xs btn-default" data-toggle="dropdown"><span class="icon icon-lg flaticon-zoom45"></span></a>
+						</div>
+						<div class="btn-outer btn-shopping-cart">
+							<a href="#drop-shopcart" class="btn btn-xs btn-default open-cart" data-toggle="dropdown"><span class="icon icon-md flaticon-shopping66"></span><span class="badge">
+    							{% block basketAmount %}
+    							
+    							{% endblock %}
+    							
+							</span></a>
+							<div class="hidden">
+								<div id="drop-shopcart" class="shoppingcart-box">
+									<div class="title">
+										Koszyk
+									</div>
+									<div class=" hidden" id="liTemplate">
+										<div class="item animate-delay fadeInRight">
+											<div class="image">
+											</div>
+											<div class="description">
+												<span class="product-name"></span><strong class="price"></strong>
+											</div>
+											<div class="buttons">
+												<a href="#" class="icon icon-sm flaticon-write13"></a><a href="#" class="icon icon-sm flaticon-recycle59 remove-from-cart"></a>
+											</div>
+										</div>
+									</div>
+									
+										{% block basketRight  %}
+										
+										{% endblock %}
+
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="back-to-top">
+			<span class="arrow-up"><img src="images/icon-scroll-arrow.png" alt=""></span><img src="images/icon-scroll-mouse.png" alt="">
+		</div>
+    		{% include 'navbarTop.html' %}
+		</header>
+
+		<section class="breadcrumbs">
+    		<div class="container">
+    			<a href="index.html">home</a><span class="divider">&nbsp;</span><a href="#">women</a><span class="divider">&nbsp;</span>Hilfiger Denim Martina Bomber Jacket
+    		</div>
+		</section>
+		{% include 'profitsMenu.html' %}
+		{% block oneProduct %}
+		{% endblock %}
+		
+		<!-- //end Breadcrumbs -->
+
+		
+		
+{% include 'footer.html' %}
+</body>
+</html>

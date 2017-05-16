@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+      {{ form_start(editUserForm) }}
+			{{ form_row(editUserForm.name) }}
+			{{ form_row(editUserForm.city) }}
+			{{ form_row(editUserForm.street) }}
+        
+            <button type="submit">Register!</button>
+        {{ form_end(editUserForm) }}
+{% endblock %}

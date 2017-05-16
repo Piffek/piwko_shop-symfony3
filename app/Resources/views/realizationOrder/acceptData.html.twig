@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    {% if is_granted('ROLE_USER') %}
+		{{ app.user.username}}<br>
+		{{ app.user.name}}
+		{{ app.user.city}}
+		{{ app.user.street}}
+		<td><a href="{{ path('history')}}">Zrealizuj</a></td>
+	{% else %}
+		{{ form_start(form) }}
+			{{ form_row(form.name) }}
+			{{ form_row(form.email) }}
+			{{ form_row(form.street) }}
+			{{ form_row(form.city) }}
+			<button type="submit">Zrealizuj</button>
+		{{ form_end(form) }}
+	{% endif %}
+{% endblock %}
