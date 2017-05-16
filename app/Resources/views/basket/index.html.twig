@@ -13,28 +13,35 @@
                       </tr>
                 </thead>
                 <tbody>
+				{% set sum = 0 %}
                 {% if is_granted('ROLE_USER') %}
                 	{% for itemLoggedinUser in basketLoggedinUser %}
             		    <tr>
                         	<td>{{ itemLoggedinUser.item.name  }}</td>
                         	<td>{{ itemLoggedinUser.item.price  }}</td>
                         	<td>{{ itemLoggedinUser.amount  }}</td>
+							 {% set sum = sum + itemLoggedinUser.item.price %}
                         	<td><a href="{{ path('deleteWithBasket', {'id':itemLoggedinUser.id})  }}">Usuń</a></td>
                       	</tr>
                   	{% endfor %}
-        	    {% else %}
+					<a href="{{ path('realizationOrder')}}"><button class="waves-effect waves-light btn-large">Zrealizuj</button></a>
+					<a href="{{ path('realizationByPayPall', {'amount':sum}) }}"><button class="waves-effect waves-light btn-large">PayPall</button></a>
+			  {% else %}
             		{% for item in app.session.get('aBasket') %}
             			<tr>
                         	<td>{{ item.name }}</td>
                         	<td>{{ item.price }}</td>
                         	<td>{{ item.amount }}</td>
+							{% set sum = sum + item.amount%}
                         	<td><a href="{{ path('deleteWithBasket', {'id':item.id})  }}">Usuń</a></td>
                       	</tr>
             		{% endfor %}
+					<a href="{{ path('realizationByPayPall', {'amount':sum}) }}"><button class="waves-effect waves-light btn-large">PayPall</button></a>
+					<a href="{{ path('realizationOrder')}}"><button class="waves-effect waves-light btn-large">Zrealizuj</button></a>
         	    {% endif %}
             	 </tbody>
                </table>
-               <a href="{{ path('realizationOrder') }}"><button class="waves-effect waves-light btn-large">Zrealizuj</button></a>
+             
         </div>
     </div>
 {% endblock %}
