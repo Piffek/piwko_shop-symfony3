@@ -11,8 +11,7 @@ use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 
 class RegisterForm extends AbstractType
 {
-	public function buildForm(FormBuilderInterface $builder, array $options)
-	{
+	public function buildForm(FormBuilderInterface $builder, array $options){
 		$builder
 		->add('username', TextType::class)
 		->add('email', EmailType::class)
@@ -23,8 +22,7 @@ class RegisterForm extends AbstractType
 				'type'=>PasswordType::class
 		]);
 	}
-	public function configureOptions(OptionsResolver $resolver)
-	{
+	public function configureOptions(OptionsResolver $resolver){
 		$resolver->setDefaults([
 				'data_class' => User::class
 		]);

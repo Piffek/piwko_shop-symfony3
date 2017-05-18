@@ -17,6 +17,6 @@ class ProductController extends Controller
 	 */
 	public function addProductAction(){
 		
-		return $this->render('Admin/addProduct.html.twig');
+		return $this->render('admin/product/addProduct.html.twig');
 	}
 }
