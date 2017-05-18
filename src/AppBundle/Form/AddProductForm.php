@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 
 namespace AppBundle\Form;
 
@@ -21,12 +21,13 @@ class AddProductForm extends AbstractType
 		 ->add('amount')
 		 ->add('promotion')
 		 ->add('textPromotion', TextType::class)
-		 ->add('percentPromotion')
+		 ->add('percentPromotion');
 	 }
 	 
-	 public function configureResolve(OptionsResolver $resolver){
+	 public function configureOptions(OptionsResolver $resolver){
 		 $resolver->setDefaults([
-		    'data_class' => Item::class,
-		 ]);
+				'data_class' => Item::class
+		]);
 		 
 	 }
+}
