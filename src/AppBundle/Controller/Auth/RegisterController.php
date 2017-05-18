@@ -13,7 +13,7 @@ use AppBundle\Form\RegisterForm;
 class RegisterController extends Controller
 {
 	/**
-	 * @Route("/register", name="user_registration")
+	 * @Route("/register/", name="user_registration")
 	 */
     public function registerAction(Request $request)
     {

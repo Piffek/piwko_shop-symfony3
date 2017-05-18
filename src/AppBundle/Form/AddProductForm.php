@@ -7,7 +7,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use AppBundle\Entity\Item;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 
 class AddProductForm extends AbstractType
 {
@@ -21,6 +21,7 @@ class AddProductForm extends AbstractType
 		 ->add('amount')
 		 ->add('promotion')
 		 ->add('textPromotion', TextType::class)
+		 ->add('photo', FileType::class, array('label' => 'Zdjecie Produktu'))
 		 ->add('percentPromotion');
 	 }
 	 
