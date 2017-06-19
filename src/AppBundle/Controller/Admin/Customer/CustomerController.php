@@ -43,4 +43,16 @@ class CustomerController extends Controller
 	 			'form' => $form->createView()
 	 	]);
 	 }
+	 
+	 /**
+	  * @Route("/deleteCustomer/{id}", name="deleteCustomer")
+	  */
+	 public function deleteCustomerAction(Request $request, $id){
+	 	$em = $this->getDoctrine()->getManager();
+	 	$userData = $em->getRepository('AppBundle:User')->find($id);
+	 	$em->remove($userData);
+	 	$em->flush();
+	 	
+	 	return $this->redirectToRoute('showCustomer');
+	 }
 }

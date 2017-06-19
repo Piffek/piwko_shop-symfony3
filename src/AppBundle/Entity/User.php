@@ -86,7 +86,7 @@ class User implements UserInterface, \Serializable
     private $isActive;
     
     /**
-     * @ORM\OneToMany(targetEntity="Basket", mappedBy="user")
+     * @ORM\OneToMany(targetEntity="Basket", mappedBy="user", cascade={"remove"})
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
     protected $basket;
@@ -102,14 +102,14 @@ class User implements UserInterface, \Serializable
     /**
      *
      * @var unknown
-     * @ORM\OneToMany(targetEntity="Buying", mappedBy="user")
+     * @ORM\OneToMany(targetEntity="Buying", mappedBy="user", cascade={"remove"})
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
     protected $buying;
 	
 	/**
 	*
-	*@ORM\OneToMany(targetEntity="OtherDeliveryData", mappedBy="user")
+	*@ORM\OneToMany(targetEntity="OtherDeliveryData", mappedBy="user", cascade={"remove"})
 	*@ORM\JoinColumn(name="user_id", referencedColumnName="id")
 	*/
 	protected $deliveryData;

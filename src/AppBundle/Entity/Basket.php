@@ -36,14 +36,14 @@ class Basket
     
     /**
      * One Cart has One Customer.
-     * @ORM\ManyToOne(targetEntity="User", inversedBy="basket")
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="basket", cascade={"remove"})
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
     protected $user;
     
     /**
      * One Cart has One Customer.
-     * @ORM\ManyToOne(targetEntity="Item",inversedBy="basket")
+     * @ORM\ManyToOne(targetEntity="Item",inversedBy="basket", cascade={"remove"})
      * @ORM\JoinColumn(name="item_id", referencedColumnName="id")
      */
     protected $item;

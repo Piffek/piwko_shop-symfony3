@@ -7,7 +7,7 @@
                 {% for user in allUsers %}
 					{{ user.name }}
 					<a href=" {{ path('editCustomerData', {id:user.id}) }} ">Edytuj</a>
-					<a href="">Usuń</a><br>
+					<a href=" {{ path('deleteCustomer', {id:user.id}) }} ">Usuń</a><br>
 				{% endfor %}
             </div>
         </div>
