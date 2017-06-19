@@ -7,6 +7,7 @@ imports:
 # http://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
     locale: en
+    photo_directory: '%kernel.root_dir%/../web/uploads/zdjeciaProduktow'
 
 framework:
     #esi: ~
@@ -74,9 +75,9 @@ jms_payment_core:
         secret: def00000090cac31d858e7b8e8dcec3ccdfdc9ce741ca07930be24983b878b71a2a46a855e8e4322f8a1c8aabbbb713f78401ee31fb34d686ce970352d2f7fb9400505c1
 
 jms_payment_paypal:
-    username: patrykpiwko123412-facilitator_api1.gmail.com
-    password: 22T9SYK82CLVSRQY
-    signature: AFcWxV21C7fd0v3bYYYRCpSSRl31ALlsL.moCRq9uIIihgIqbJ2-kVy9
+    username: 
+    password: 
+    signature: 
 
 
 

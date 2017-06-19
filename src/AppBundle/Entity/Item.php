@@ -7,6 +7,7 @@ use Doctrine\ORM\Mapping\ManyToMany;
 use Doctrine\ORM\Mapping\JoinColumn;
 use Doctrine\ORM\Mapping\JoinTable;
 use Doctrine\ORM\Mapping\OneToOne;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Item
@@ -86,6 +87,26 @@ class Item
      * @ORM\JoinColumn(name="item_id", referencedColumnName="id")
      */
 	protected $basket;
+	
+	 /**
+     * @ORM\Column(type="string")
+     *
+     * @Assert\File(mimeTypes={ "image/jpeg" })
+     */
+    private $photo;
+	
+	
+	public function getPhoto()
+    {
+        return $this->photo;
+    }
+
+    public function setPhoto($photo)
+    {
+        $this->photo = $photo;
+
+        return $this;
+    }
 
     /**
      * Get id

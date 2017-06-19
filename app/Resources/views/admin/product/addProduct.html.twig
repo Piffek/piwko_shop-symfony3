@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{% extends 'baseAdmin.html.twig' %}
 
 {% block body %}
     <div class="container">
@@ -11,7 +11,7 @@
                     {{ form_row(form.promotion) }}
 					{{ form_row(form.textPromotion) }}
 					{{ form_row(form.percentPromotion) }}
-                
+					{{ form_row(form.photo) }}
                     <button type="submit">Dodaj produkt</button>
                 {{ form_end(form) }}
             </div>
