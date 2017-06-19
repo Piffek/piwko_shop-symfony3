@@ -17,7 +17,6 @@ class ProductController extends Controller
 	 * @Route("/dodajProdukt", name="addProduct")
 	 */
 	public function addProductAction(Request $request){
-		
 		$thisItem = new Item;
 		$form = $this->createForm(AddProductForm::class, $thisItem);
 		$form->handleRequest($request);
@@ -41,5 +40,25 @@ class ProductController extends Controller
 		
 		return $this->render('admin/product/addProduct.html.twig', [
 		    'form' => $form->createView()]);
+	}
+	
+
+	/**
+	 * @Route("/produkty", name="allProduct")
+	 */
+	public function allProduct(){
+		$em = $this->getDoctrine()->getManager();
+		$allProducts = $em->getRepository('AppBundle:Item')->findAll();
+		
+		return $this->render('admin/product/allProducts.html.twig', [
+				'allProducts' => $allProducts,
+		]);
+	}
+	
+	/**
+	 * @Route("/edytujProdukt", name="editProduct")
+	 */
+	public function editProductAction(Request $request){
+		
 	}
 }

@@ -1,0 +1,13 @@
+{% extends 'baseAdmin.html.twig' %}
+
+{% block body %}
+    {% for product in allProducts %}
+    	{{ product.name }}<br>
+    	{{ product.price }} zł<br>
+    	{{ product.promotion }}<br>
+    	{{ product.buyAmount }}<br>
+    	<a href=" {{ path('editProduct') }} ">Edytuj</a>
+    	<a href=" ">Usuń</a>
+    	<hr>
+    {% endfor %}
+{% endblock %}
