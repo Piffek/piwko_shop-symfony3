@@ -33,6 +33,6 @@ class IndexController extends Controller
 		
 		$html = $this->renderView('Demo/pdf.html.twig');
 	
-		$this->get('app.generate_pdf')->returnPDFResponseFromHTML($html, $this->get("white_october.tcpdf"));
+		$this->get('app.generate_pdf')->returnPDFResponseFromHTML($html, $this->get("white_october.tcpdf"), 'D');
 	}
 }
