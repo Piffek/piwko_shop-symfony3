@@ -19,7 +19,8 @@ class ProductController extends Controller
 	 */
 	public function addProductAction(Request $request){
 		
-		$form = $this->createForm(AddProductForm::class);
+		$thisItem = new Item;
+		$form = $this->createForm(AddProductForm::class, $thisItem);
 		$form->handleRequest($request);
 		
 		if($form->isValid() && $form->isSubmitted()){
@@ -29,6 +30,10 @@ class ProductController extends Controller
     		 * @var Item $item
     		 */
 			$item = $form->getData();
+			
+			$file = $thisItem->getPhoto();
+			$filename = $this->get('app.file_uploader')->upload($file);
+			$thisItem->setPhoto($filename);
 			$em = $this->getDoctrine()->getManager();
 			$em->persist($item);
 			

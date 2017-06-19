@@ -7,7 +7,8 @@ imports:
 # http://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
     locale: en
-    photo_directory: '%kernel.root_dir%/../web/uploads/zdjeciaProduktow'
+    photo_directory: '%kernel.root_dir%/../web/uploads/productsPhoto'
+>>>>>>> f9a5da703f1eaa852002f7c713260ecd6d6375e6
 
 framework:
     #esi: ~
