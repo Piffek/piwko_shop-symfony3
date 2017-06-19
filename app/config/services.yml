@@ -21,3 +21,6 @@ services:
     app.file_uploader:
         class: AppBundle\FileUploader
         arguments: ['%photo_directory%']
+        
+    app.generate_pdf:
+        class: AppBundle\GeneratePDF

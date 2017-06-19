@@ -16,7 +16,23 @@ class IndexController extends Controller
 	 * @Route("/", name="adminHomePage")
 	 */
 	public function indexAction(){
-		
+
 		return $this->render('admin/index.html.twig');
+	}
+	
+	
+	
+	
+	/**
+	 * Export to PDF
+	 *
+	 * @Route("/pdf", name="acme_demo_pdf")
+	 */
+	public function pdfAction()
+	{
+		
+		$html = $this->renderView('Demo/pdf.html.twig');
+	
+		$this->get('app.generate_pdf')->returnPDFResponseFromHTML($html, $this->get("white_october.tcpdf"));
 	}
 }
