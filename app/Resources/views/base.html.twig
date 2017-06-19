@@ -18,9 +18,6 @@
     <nav>
         <div class="nav-wrapper">
           <div class="col s12">
-		    {% if is_granted('ROLE_ADMIN') %}
-				<a href="{{ path('adminHomePage') }}">Panel Administratora</a> | 
-			{% endif %}
             {% if is_granted('ROLE_USER') %}
                 <a href="{{ path('logout') }}">Wyloguj</a> | 
 				<a href="{{ path('changeData', {id:app.user.id}) }}">Zmień dane</a> | 

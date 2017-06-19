@@ -16,7 +16,7 @@ class DefaultController extends Controller
     public function indexAction(Request $request)
     {
     	
-    	$products = $this->getDoctrine()->getManager()->createQueryBuilder()
+    	$posts = $this->getDoctrine()->getManager()->createQueryBuilder()
        	       ->select('u')
         	   ->from('AppBundle:Item', 'u')
         	   ->getQuery()
@@ -24,7 +24,7 @@ class DefaultController extends Controller
 
        	
         return $this->render('default/index.html.twig',[
-			'products' => $products,
+			'posts' => $posts,
 		]);
     }
     

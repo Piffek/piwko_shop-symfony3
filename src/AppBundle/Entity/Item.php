@@ -4,11 +4,6 @@ namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\JoinColumn;
-<<<<<<< HEAD
-use Doctrine\ORM\Mapping\JoinTable;
-use Doctrine\ORM\Mapping\OneToOne;
-=======
->>>>>>> f9a5da703f1eaa852002f7c713260ecd6d6375e6
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -89,26 +84,6 @@ class Item
      * @ORM\JoinColumn(name="item_id", referencedColumnName="id")
      */
 	protected $basket;
-	
-	 /**
-     * @ORM\Column(type="string")
-     *
-     * @Assert\File(mimeTypes={ "image/jpeg" })
-     */
-    private $photo;
-	
-	
-	public function getPhoto()
-    {
-        return $this->photo;
-    }
-
-    public function setPhoto($photo)
-    {
-        $this->photo = $photo;
-
-        return $this;
-    }
 
 	
 	/**

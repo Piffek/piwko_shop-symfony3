@@ -36,11 +36,6 @@ class ProductController extends Controller
 			$thisItem->setPhoto($filename);
 			$em = $this->getDoctrine()->getManager();
 			$em->persist($item);
-			
-			$file = $item->getPhoto();
-			$fileName = $this->get('app.file_uploader')->upload($file);
-			$item->setPhoto($fileName);
-			
 			$em->flush();
 			return $this->redirectToRoute('addProduct');
 		}

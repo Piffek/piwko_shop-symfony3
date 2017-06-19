@@ -29,7 +29,6 @@ class RegisterController extends Controller
     		$user = $form->getData();
     		$em = $this->getDoctrine()->getManager();
     		$em->persist($user);
-			$fileName = $this->get('app.file_uploader')->upload($file);
     		$em->flush();
     		return $this->redirectToRoute('homepage');
     	}
