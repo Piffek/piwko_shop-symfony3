@@ -28,8 +28,6 @@ class UserDataController extends Controller
 	 		
 	 		$em->persist($userData);
 	 		$em->flush();
-	 		
-	 		//return $this->redirectToRoute('changeData');
 	 	}
 	 	
 	 	

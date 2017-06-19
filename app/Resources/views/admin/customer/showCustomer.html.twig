@@ -6,6 +6,8 @@
             <div class="col s12">
                 {% for user in allUsers %}
 					{{ user.name }}
+					<a href=" {{ path('editCustomerData', {id:user.id}) }} ">Edytuj</a>
+					<a href="">Usuń</a><br>
 				{% endfor %}
             </div>
         </div>

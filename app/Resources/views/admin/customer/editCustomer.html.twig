@@ -1,0 +1,10 @@
+{% extends 'baseAdmin.html.twig' %}
+
+{% block body %}
+    {{ form_start(form) }}
+	    {{ form_row(form.name) }}
+	    {{ form_row(form.city) }}
+	    {{ form_row(form.street) }}
+	    <button type="submit">Zapisz</button>
+	{{ form_end(form) }}
+{% endblock %}

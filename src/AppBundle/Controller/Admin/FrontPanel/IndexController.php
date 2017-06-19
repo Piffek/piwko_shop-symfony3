@@ -13,10 +13,10 @@ use Symfony\Component\HttpFoundation\Response;
 class IndexController extends Controller
 {
 	/**
-	 * @Route("/", name="index")
+	 * @Route("/", name="adminHomePage")
 	 */
 	public function indexAction(){
 		
-		return $this->render('Admin/index.html.twig');
+		return $this->render('admin/index.html.twig');
 	}
 }
