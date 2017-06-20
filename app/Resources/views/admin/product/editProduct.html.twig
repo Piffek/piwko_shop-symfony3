@@ -2,4 +2,9 @@
 
 {% block body %}
 
+<img src="{{ asset('uploads/productsPhoto/' ~ photo) }}" />
+
+	{{ form_start(form) }}
+	    <button type="submit">Zapisz</button>
+	{{ form_end(form) }}
 {% endblock %}

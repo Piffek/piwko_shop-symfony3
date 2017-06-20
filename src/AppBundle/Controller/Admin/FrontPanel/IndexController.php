@@ -30,8 +30,11 @@ class IndexController extends Controller
 	 */
 	public function pdfAction()
 	{
-		
-		$html = $this->renderView('Demo/pdf.html.twig');
+		$users = $this->getDoctrine()->getRepository('AppBundle:user')->findAll();
+		$html = $this->renderView('Demo/pdf.html.twig', [		
+		'users' => $users
+				
+		]);
 	
 		$this->get('app.generate_pdf')->returnPDFResponseFromHTML($html, $this->get("white_october.tcpdf"), 'D');
 	}

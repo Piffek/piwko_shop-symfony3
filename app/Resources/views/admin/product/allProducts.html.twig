@@ -6,7 +6,7 @@
     	{{ product.price }} zł<br>
     	{{ product.promotion }}<br>
     	{{ product.buyAmount }}<br>
-    	<a href=" {{ path('editProduct') }} ">Edytuj</a>
+    	<a href=" {{ path('editProduct', {id:product.id}) }} ">Edytuj</a>
     	<a href=" ">Usuń</a>
     	<hr>
     {% endfor %}

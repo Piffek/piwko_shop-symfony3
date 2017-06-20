@@ -2,10 +2,12 @@
 namespace AppBundle\Controller\Admin\Product;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use AppBundle\Entity\Item;
 use AppBundle\Form\AddProductForm;
+use AppBundle\Form\EditProductForm;
 
 
 /**
@@ -56,9 +58,30 @@ class ProductController extends Controller
 	}
 	
 	/**
-	 * @Route("/edytujProdukt", name="editProduct")
+	 * @Route("/edytujProdukt/{id}", name="editProduct")
 	 */
-	public function editProductAction(Request $request){
+	public function editProductAction(Request $request, $id){
 		
+		$em = $this->getDoctrine()->getManager();
+		$item = $em->getRepository('AppBundle:Item')->find($id);
+		$form = $this->createForm(EditProductForm::class, $item);
+		$form->handleRequest($request);
+		$oldPhoto = $item->getPhoto();
+
+		if($form->isValid() && $form->isSubmitted()){	
+		
+			$file = $item->getPhoto();
+			$filename = $this->get('app.file_uploader')->upload($file);
+			
+			$item->setPhoto($filename);
+			$em->persist($item);
+			$em->flush();
+			
+			return $this->redirectToRoute('editProduct', array('id' => $id));
+		}
+		return $this->render('admin/product/editProduct.html.twig', [
+				'form' => $form->createView(),
+				'photo' => $oldPhoto
+		]);
 	}
 }

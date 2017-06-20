@@ -21,7 +21,13 @@ class FileUploader
 		return $filename;
 	}
 	
+	public function getPhoto(UploadedFile $file)
+	{
+		return $file->getClientOriginalName();
+	
+	}
+	
 	public function getTargetDir(){
-		return $this->TargetDir;
+		return $this->targetDir;
 	}
 }

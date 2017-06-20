@@ -92,7 +92,7 @@ class Item
 	 * @Assert\NotBlank(message="Please, upload the product brochure as a PDF file.")
 	 * @Assert\File(mimeTypes={ "image/jpeg" })
 	 */
-	private $photo;
+	public $photo;
 	
 	public function getPhoto()
 	{
