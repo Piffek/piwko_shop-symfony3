@@ -21,7 +21,10 @@ class EditProductForm extends AbstractType
 		 ->add('amount')
 		 ->add('promotion')
 		 ->add('textPromotion', TextType::class)
-		 ->add('photo',FileType::class, array('data_class' => null))
+		 ->add('photo',FileType::class, array(
+		 		'data_class' => null,
+		 		'required'   => false,
+		 ))
 		 ->add('percentPromotion');
 	 }
 	 

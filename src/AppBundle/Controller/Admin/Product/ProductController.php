@@ -66,14 +66,16 @@ class ProductController extends Controller
 		$item = $em->getRepository('AppBundle:Item')->find($id);
 		$form = $this->createForm(EditProductForm::class, $item);
 		$form->handleRequest($request);
-		$oldPhoto = $item->getPhoto();
 
 		if($form->isValid() && $form->isSubmitted()){	
 		
-			$file = $item->getPhoto();
-			$filename = $this->get('app.file_uploader')->upload($file);
+			if(!empty($form['photo']->getData())){
+				
+				$file = $item->getPhoto();
+				$filename = $this->get('app.file_uploader')->upload($file);
+				$item->setPhoto($filename);
+			}
 			
-			$item->setPhoto($filename);
 			$em->persist($item);
 			$em->flush();
 			
@@ -81,7 +83,7 @@ class ProductController extends Controller
 		}
 		return $this->render('admin/product/editProduct.html.twig', [
 				'form' => $form->createView(),
-				'photo' => $oldPhoto
+				'photo' => $item->getPhoto()
 		]);
 	}
 }

@@ -21,10 +21,10 @@ class FileUploader
 		return $filename;
 	}
 	
-	public function getPhoto(UploadedFile $file)
+	public function removeFile(UploadedFile $file)
 	{
-		return $file->getClientOriginalName();
-	
+		$file_path = $this->targetDir.'/'.$file;
+		 unlink($file_path->getClientOriginalName());
 	}
 	
 	public function getTargetDir(){
