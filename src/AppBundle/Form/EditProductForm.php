@@ -16,7 +16,9 @@ class EditProductForm extends AbstractType
      */
 	 public function buildForm(FormBuilderInterface $builder, array $options){
 		 $builder
-		 ->add('name', TextType::class, array('attr' => array('minlength' => 4)))
+		 ->add('name', TextType::class, array(
+		 		'attr' => array('minlength' => 4),
+		 ))
 		 ->add('kind')
 		 ->add('rental')
 		 ->add('price')
