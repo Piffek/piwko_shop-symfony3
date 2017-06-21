@@ -61,14 +61,12 @@ class ProductController extends Controller
 	 * @Route("/edytujProdukt/{id}", name="editProduct")
 	 */
 	public function editProductAction(Request $request, $id){
-		
 		$em = $this->getDoctrine()->getManager();
 		$item = $em->getRepository('AppBundle:Item')->find($id);
 		$form = $this->createForm(EditProductForm::class, $item);
 		$form->handleRequest($request);
-
-		if($form->isValid() && $form->isSubmitted()){	
 		
+		if($form->isValid() && $form->isSubmitted()){	
 			if(!empty($form['photo']->getData())){
 				
 				$file = $item->getPhoto();
@@ -86,4 +84,6 @@ class ProductController extends Controller
 				'photo' => $item->getPhoto()
 		]);
 	}
+	
+	
 }

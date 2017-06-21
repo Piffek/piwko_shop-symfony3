@@ -43,6 +43,22 @@ class Item
      * @ORM\Column(name="amount", type="integer")
      */
     private $amount;
+    
+    
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="kind", type="string", length=255)
+     */
+    private $kind;
+    
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="rental", type="integer")
+     */
+    private $rental;
+    
 
     /**
      * @var string
@@ -87,12 +103,22 @@ class Item
 
 	
 	/**
-	 * @ORM\Column(type="string")
+	 * @var string
+	 * @ORM\Column(name="photo", type="string", length=255)
 	 *
 	 * @Assert\File(mimeTypes={ "image/jpeg" })
 	 */
-	public $photo;
+	private $photo;
 	
+	/**
+	 * Constructor
+	 */
+	public function __construct()
+	{
+		$this->basket = new \Doctrine\Common\Collections\ArrayCollection();
+		$this->rental = false;
+	}
+
 	public function getPhoto()
 	{
 		return $this->photo;
@@ -330,13 +356,7 @@ class Item
     {
         return $this->basket;
     }
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->basket = new \Doctrine\Common\Collections\ArrayCollection();
-    }
+
 
     /**
      * Add basket
@@ -360,5 +380,53 @@ class Item
     public function removeBasket(\AppBundle\Entity\Basket $basket)
     {
         $this->basket->removeElement($basket);
+    }
+    
+    /**
+     * Get rental
+     *
+     * @return integer
+     */
+    public function getRental()
+    {
+    	return $this->rental;
+    }
+    
+    /**
+     * Set rental
+     *
+     * @param integer $rental
+     *
+     * @return Item
+     */
+    public function setRental($rental)
+    {
+    	$this->rental = $rental;
+    
+    	return $this;
+    }
+    
+    /**
+     * Get kind
+     *
+     * @return string
+     */
+    public function getKind()
+    {
+    	return $this->kind;
+    }
+    
+    /**
+     * Set kind
+     *
+     * @param string $kind
+     *
+     * @return Item
+     */
+    public function setKind($kind)
+    {
+    	$this->kind = $kind;
+    
+    	return $this;
     }
 }
