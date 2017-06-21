@@ -16,13 +16,13 @@ class EditProductForm extends AbstractType
      */
 	 public function buildForm(FormBuilderInterface $builder, array $options){
 		 $builder
-		 ->add('name', TextType::class, array('attr' => array('minlength' => 4))
+		 ->add('name', TextType::class, array('attr' => array('minlength' => 4)))
 		 ->add('kind')
 		 ->add('rental')
 		 ->add('price')
 		 ->add('amount')
 		 ->add('promotion')
-		 ->add('textPromotion', TextType::class)
+		 ->add('textPromotion', TextType::class, array('attr' => array('minlength' => 4)))
 		 ->add('percentPromotion')
 		 ->add('photo', FileType::class, array(
 		 		'required'   => false,

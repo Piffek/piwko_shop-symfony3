@@ -17,11 +17,11 @@ class AddProductForm extends AbstractType
 	 public function buildForm(FormBuilderInterface $builder, array $options){
 		 $builder
 		 ->add('name', TextType::class, array('attr' => array('minlength' => 4)))
-		 ->add('kind')
+		 ->add('kind', TextType::class)
 		 ->add('price')
 		 ->add('amount')
 		 ->add('promotion')
-		 ->add('textPromotion', TextType::class)
+		 ->add('textPromotion', TextType::class, array('attr' => array('minlength' => 4)))
 		 ->add('percentPromotion')
 		 ->add('photo', FileType::class, array('label' => 'Zdjecie Produktu'));
 	 }
