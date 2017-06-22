@@ -84,7 +84,7 @@ class Item
     /**
      * @var int
      *
-     * @ORM\Column(name="buyAmount", type="integer", nullable=true))
+     * @ORM\Column(name="buyAmount", type="integer", nullable=true)
      */
     private $buyAmount;
 
@@ -105,8 +105,6 @@ class Item
 	/**
 	 * @var string
 	 * @ORM\Column(name="photo", type="string", length=255)
-	 *
-	 * @Assert\File(mimeTypes={ "image/jpeg" })
 	 */
 	private $photo;
 	
@@ -117,7 +115,10 @@ class Item
 	{
 		$this->basket = new \Doctrine\Common\Collections\ArrayCollection();
 		$this->rental = false;
+	
 	}
+	
+
 
 	public function getPhoto()
 	{
@@ -126,9 +127,12 @@ class Item
 	
 	public function setPhoto($photo)
 	{
-		$this->photo = $photo;
-	
-		return $this;
+		if($photo !== null){
+			$this->photo = $photo;
+			
+			return $this;
+		}
+
 	}
 	
     /**

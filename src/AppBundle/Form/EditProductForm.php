@@ -28,9 +28,14 @@ class EditProductForm extends AbstractType
 		 ->add('percentPromotion')
 		 ->add('photo', FileType::class, array(
 		 		'required'   => false,
-		 		'data_class' => null
+		 		'data_class' => null,
+		 		'data' => function ($photo) {
+		 		return $photo->getPhoto();
+		 		}
+		 		//'data_class' => null,
 		 ));
 	 }
+	 
 	 
 	 public function configureOptions(OptionsResolver $resolver){
 		 $resolver->setDefaults([

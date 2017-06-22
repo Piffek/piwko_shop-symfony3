@@ -67,14 +67,14 @@ class ProductController extends Controller
 		$form->handleRequest($request);
 		
 		$hasPhoto[] = $item->getPhoto();
+
 		if($form->isValid() && $form->isSubmitted()){	
-			if($form['photo'] && $getPhoto = $form['photo']->getData()){
-				
+			if(!is_null($form['photo']->getData())){
 				$file = $item->getPhoto();
 				$filename = $this->get('app.file_uploader')->upload($file);
 				$item->setPhoto($filename);
 			}
-			
+
 			$em->persist($item);
 			$em->flush();
 			
