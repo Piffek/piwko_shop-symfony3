@@ -66,8 +66,9 @@ class ProductController extends Controller
 		$form = $this->createForm(EditProductForm::class, $item);
 		$form->handleRequest($request);
 		
+		$hasPhoto[] = $item->getPhoto();
 		if($form->isValid() && $form->isSubmitted()){	
-			if(!empty($form['photo']->getData())){
+			if($form['photo'] && $getPhoto = $form['photo']->getData()){
 				
 				$file = $item->getPhoto();
 				$filename = $this->get('app.file_uploader')->upload($file);

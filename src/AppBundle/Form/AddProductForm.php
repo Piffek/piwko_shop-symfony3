@@ -18,7 +18,6 @@ class AddProductForm extends AbstractType
 		 $builder
 		 ->add('name', TextType::class, array(
 		 		'attr' => array('minlength' => 4),
-		 		'data' => 'abcdef',
 		 ))
 		 ->add('kind', TextType::class)
 		 ->add('price')
