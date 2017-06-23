@@ -99,6 +99,13 @@ class Item
 	 * @ORM\JoinColumn(name="item_id", referencedColumnName="id")
 	 */
 	protected $rental;
+	
+	/**
+	 * One Cart has One Customer.
+	 * @ORM\OneToOne(targetEntity="Rental", inversedBy="rentalItem")
+	 * @ORM\JoinColumn(name="rentalId", referencedColumnName="id")
+	 */
+	protected $rentalId;
 
 	
 	/**

@@ -47,6 +47,7 @@ class Basket
      * @ORM\JoinColumn(name="item_id", referencedColumnName="id")
      */
     protected $item;
+   
 
 
     public function __construct()

@@ -4,6 +4,7 @@ namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\ManyToOne;
+use Doctrine\ORM\Mapping\OneToOne;
 
 /**
  * Rental
@@ -50,6 +51,13 @@ class Rental
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
     protected $user;
+    
+    
+    /**
+     * One Customer has One Cart.
+     * @OneToOne(targetEntity="Item", mappedBy="rentalId")
+     */
+    private $rentalItem;
 
     public function __construct()
     {
