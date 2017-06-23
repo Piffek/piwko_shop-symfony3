@@ -27,9 +27,7 @@ class EditProductForm extends AbstractType
 		 			'nie' => false,
 		 				
 		 		),
-		 		'choices_as_values' => true,
-                'expanded' => true,
-                'multiple' => false
+               'expanded' => true,
 		 		
 		 ))
 		 ->add('price')

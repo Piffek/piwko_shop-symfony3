@@ -86,5 +86,12 @@ class ProductController extends Controller
 		]);
 	}
 	
+	/**
+	 * @Route("/wypozycz", name="rentProduct")
+	 */
+	public function rentProductAction($id){
+		
+	}
+	
 	
 }
