@@ -21,15 +21,6 @@ class EditProductForm extends AbstractType
 		 		'attr' => array('minlength' => 4),
 		 ))
 		 ->add('kind')
-		 ->add('rental',ChoiceType::class, array(
-		 		'choices' => array(
-		 			'tak' => true,
-		 			'nie' => false,
-		 				
-		 		),
-               'expanded' => true,
-		 		
-		 ))
 		 ->add('price')
 		 ->add('amount')
 		 ->add('promotion')

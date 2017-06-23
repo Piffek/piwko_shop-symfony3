@@ -16,7 +16,7 @@
         		<div class="card-panel blue-grey lighten-5">
             		<span class="flow-text ">
             		    <a href="{{ path('oneProduct', {id:product.id}) }}">{{product.name}}</a>
-            			{% if (product.kind == 'book' or  product.kind == 'video')  %}
+            			{% if (product.kind == 'book' or  product.kind == 'video' and is_granted("ROLE_USER"))  %}
             				<a href="{{ path('rentProduct', {id:product.id}) }}">Wypożycz</a>
             			{% endif %}
             		</span>

@@ -50,14 +50,7 @@ class Item
      *
      * @ORM\Column(name="kind", type="string", length=255)
      */
-    private $kind;
-    
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="rental", type="integer")
-     */
-    private $rental;
+    private $kind;   
     
 
     /**
@@ -100,6 +93,12 @@ class Item
      * @ORM\JoinColumn(name="item_id", referencedColumnName="id")
      */
 	protected $basket;
+	
+	/**
+	 * @ORM\OneToMany(targetEntity="Rental", mappedBy="item")
+	 * @ORM\JoinColumn(name="item_id", referencedColumnName="id")
+	 */
+	protected $rental;
 
 	
 	/**
@@ -114,7 +113,7 @@ class Item
 	public function __construct()
 	{
 		$this->basket = new \Doctrine\Common\Collections\ArrayCollection();
-		$this->rental = false;
+		$this->rental= new \Doctrine\Common\Collections\ArrayCollection();
 	
 	}
 	

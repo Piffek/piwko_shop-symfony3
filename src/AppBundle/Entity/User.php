@@ -113,6 +113,13 @@ class User implements UserInterface, \Serializable
 	*@ORM\JoinColumn(name="user_id", referencedColumnName="id")
 	*/
 	protected $deliveryData;
+	
+	
+	/**
+	 * @ORM\OneToMany(targetEntity="Rental", mappedBy="user")
+	 * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+	 */
+	protected $rental;
 
     public function __construct()
     {
@@ -120,6 +127,7 @@ class User implements UserInterface, \Serializable
     	$this->roles= new \Doctrine\Common\Collections\ArrayCollection();
     	$this->buying= new \Doctrine\Common\Collections\ArrayCollection();
 		$this->deliveryData= new \Doctrine\Common\Collections\ArrayCollection();
+		$this->rental= new \Doctrine\Common\Collections\ArrayCollection();
     }
     
     
