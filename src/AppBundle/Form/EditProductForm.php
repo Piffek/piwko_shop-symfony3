@@ -8,6 +8,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use AppBundle\Entity\Item;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 class EditProductForm extends AbstractType
 {
@@ -20,7 +21,17 @@ class EditProductForm extends AbstractType
 		 		'attr' => array('minlength' => 4),
 		 ))
 		 ->add('kind')
-		 ->add('rental')
+		 ->add('rental',ChoiceType::class, array(
+		 		'choices' => array(
+		 			'tak' => true,
+		 			'nie' => false,
+		 				
+		 		),
+		 		'choices_as_values' => true,
+                'expanded' => true,
+                'multiple' => false
+		 		
+		 ))
 		 ->add('price')
 		 ->add('amount')
 		 ->add('promotion')
