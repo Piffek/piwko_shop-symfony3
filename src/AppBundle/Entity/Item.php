@@ -150,6 +150,8 @@ class Item
     {
         return $this->id;
     }
+    
+    
 
     /**
      * Set name

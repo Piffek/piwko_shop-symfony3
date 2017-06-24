@@ -33,7 +33,7 @@ class Rental
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="createdAt", type="datetime")
+     * @ORM\Column(name="createdAt", type="datetime", nullable=true)
      */
     private $createdAt;
 
@@ -63,6 +63,8 @@ class Rental
     {
     	$this->user= new \Doctrine\Common\Collections\ArrayCollection();
     	$this->item= new \Doctrine\Common\Collections\ArrayCollection();
+    	$this->setCreatedAt();
+
     }
 
     /**
@@ -106,12 +108,13 @@ class Rental
      *
      * @return Rental
      */
-    public function setCreatedAt($createdAt)
+    public function setCreatedAt()
     {
-        $this->createdAt = $createdAt;
-
-        return $this;
-    }
+    	if(!$this->createdAt){
+    		$this->createdAt = new \DateTime();
+    	}
+    	
+    	return $this;    }
 
     /**
      * Get createdAt

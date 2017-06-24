@@ -6,6 +6,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use AppBundle\Entity\Item;
+use AppBundle\Entity\Rental;
 use AppBundle\Form\AddProductForm;
 use AppBundle\Form\EditProductForm;
 
@@ -86,12 +87,6 @@ class ProductController extends Controller
 		]);
 	}
 	
-	/**
-	 * @Route("/wypozycz/{id}", name="rentProduct")
-	 */
-	public function rentProductAction($id){
-		
-	}
 	
 	
 }

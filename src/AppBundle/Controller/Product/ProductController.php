@@ -5,8 +5,10 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use AppBundle\Entity\Rental;
 use Symfony\Component\HttpFoundation\Session\Session;
 use AppBundle\Entity\Basket;
+use AppBundle\Entity\Item;
 
 
 class ProductController extends Controller
@@ -36,6 +38,34 @@ class ProductController extends Controller
 				'oneItem' => $oneItem,
 				'form' => $form->createView(),
 		]);
+	}
+	
+	
+	/**
+	 * @Route("/wypozycz/{id}", name="rentProduct")
+	 */
+	public function rentProductAction($id){
+	
+		$userId = $this->getUser()->getId();
+		$item = $this->getDoctrine()->getRepository('AppBundle:Item')->find($id);
+		$user = $this->getDoctrine()->getRepository('AppBundle:User')->find($userId);
+		$format = 'Y-m-d H:i:s';
+		$todayDate = new \DateTime("now");
+		//return new Response($todayDate->date($format));
+	
+		$regivingDate = new \DateTime("now");
+		$regDate = $regivingDate->add(new \DateInterval('P7D'));
+	
+	
+		$rental = new Rental();
+		$rental->setItem($item);
+		$rental->setUser($user);
+		$rental->setForWhen($regDate);
+		$em = $this->getDoctrine()->getManager();
+		$em->persist($rental);
+		$em->flush();
+	
+		return $this->redirectToRoute('homepage');
 	}
 	
 	
@@ -84,6 +114,9 @@ class ProductController extends Controller
 			$this->addProductToBasketIfUserUsLogOffAction($oneItem, $form, $session);
 		}
 	}
+	
+	
+	 
 	
 	
 	
