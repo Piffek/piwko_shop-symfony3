@@ -87,7 +87,7 @@ class ProductController extends Controller
 	}
 	
 	/**
-	 * @Route("/wypozycz", name="rentProduct")
+	 * @Route("/wypozycz/{id}", name="rentProduct")
 	 */
 	public function rentProductAction($id){
 		
