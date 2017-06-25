@@ -255,6 +255,7 @@ class User implements UserInterface, \Serializable
     	if($isActive === 1){
     		$this->setActivationKey(0);
     	}
+    	
         $this->isActive = $isActive;
 
         return $this;

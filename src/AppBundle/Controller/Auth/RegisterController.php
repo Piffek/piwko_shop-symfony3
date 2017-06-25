@@ -5,7 +5,6 @@ namespace AppBundle\Controller\Auth;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 use AppBundle\Entity\User;
 use AppBundle\Form\RegisterForm;
 
@@ -22,8 +21,6 @@ class RegisterController extends Controller
     	$form->handleRequest($request);
     	if($form->isValid() && $form->isSubmitted())
     	{
-    		
-
     		/**
     		 * 
     		 * @var User $user
@@ -64,6 +61,13 @@ class RegisterController extends Controller
     	->setTo($user->getEmail())
     	->setBody('Hello My Name Is COs http://localhost:8000/activation/'.$user->getActivationKey());
     	$this->get('mailer')->send($message);
+    }
+    
+    /**
+     * @Route("/wyloguj", name="logout")
+     */
+    public function logout(){
+    	
     }
     
     

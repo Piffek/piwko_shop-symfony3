@@ -32,13 +32,6 @@ class LoginController extends Controller
     			);
     }
     
-    /**
-     * @Route("/wyloguj", name="logout")
-     */
-    public function logoutAction()
-    {
-    	
-    }
    
     
 

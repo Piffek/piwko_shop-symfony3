@@ -12,6 +12,7 @@ use Symfony\Component\Security\Guard\Authenticator\AbstractFormLoginAuthenticato
 use Symfony\Component\Security\Core\Security;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoder;
 use AppBundle\Entity\User;
+use Symfony\Component\HttpFoundation\Response;
 
 
 class LoginFormAuth extends AbstractFormLoginAuthenticator
@@ -53,8 +54,7 @@ class LoginFormAuth extends AbstractFormLoginAuthenticator
 	public function checkCredentials($credentials, UserInterface $user)
 	{
 		$password = $credentials['_password'];
-		
-		if ($this->passwordEncoder->isPasswordValid($user, $password)) {
+		if ($this->passwordEncoder->isPasswordValid($user, $password) AND $user->getIsActive() == 1) {
 			return true;
 		}
 	}
