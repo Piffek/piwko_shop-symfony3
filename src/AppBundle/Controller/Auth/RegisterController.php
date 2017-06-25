@@ -46,6 +46,18 @@ class RegisterController extends Controller
     
     }
     
+    /**
+     * @Route("/activation/{key}")
+     */
+    public function activationAction($key){
+    	$em = $this->getDoctrine()->getManager();
+    	$userWhoHasThisKey = $em->getRepository('AppBundle:User')->findOneByActivationKey($key);
+    	$userWhoHasThisKey->setIsActive(1);
+    	$em->persist($userWhoHasThisKey);
+    	$em->flush();
+    	return $this->redirectToRoute('homepage');
+    }
+    
     protected function sendActivationMail($user){
     	$message = (new \Swift_Message('hello'))
     	->SetFrom('cos@example.com')
