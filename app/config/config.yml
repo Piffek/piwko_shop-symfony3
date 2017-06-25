@@ -65,9 +65,9 @@ doctrine:
 # Swiftmailer Configuration
 swiftmailer:
     transport: '%mailer_transport%'
-    host: '%mailer_host%'
-    username: '%mailer_user%'
-    password: '%mailer_password%'
+    host: 'mailtrap.io'
+    username: 'eef7adcf8f6ac4'
+    password: '26e2f2128d900a'
     spool: { type: memory }
     
 jms_payment_core:
@@ -76,5 +76,5 @@ jms_payment_core:
 
 jms_payment_paypal:
     username: patrykpiwko123412-facilitator_api1.gmail.com
-    password: 22T9SYK82CLVSRQY
-    signature: AFcWxV21C7fd0v3bYYYRCpSSRl31ALlsL.moCRq9uIIihgIqbJ2-kVy9
+    password: fdgdfg
+    signature:dfgdgd
