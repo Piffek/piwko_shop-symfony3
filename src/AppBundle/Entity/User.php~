@@ -59,15 +59,22 @@ class User implements UserInterface, \Serializable
     
     
     /**
-     * @Assert\NotBlank()
+     * 
      * @Assert\Length(max=4096)
      */
     private $plainPassword;
+    
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="activationKey", type="string", length=1000, nullable=true)
+     */
+    private $activationKey;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="password", type="string", length=60, unique=true, nullable=true)
+     * @ORM\Column(name="password", type="string", length=60, unique=true)
      */
     private $password;
 
@@ -86,7 +93,7 @@ class User implements UserInterface, \Serializable
     private $isActive;
     
     /**
-     * @ORM\OneToMany(targetEntity="Basket", mappedBy="user")
+     * @ORM\OneToMany(targetEntity="Basket", mappedBy="user", cascade={"remove"})
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
     protected $basket;
@@ -102,16 +109,32 @@ class User implements UserInterface, \Serializable
     /**
      *
      * @var unknown
-     * @ORM\OneToMany(targetEntity="Buying", mappedBy="user")
+     * @ORM\OneToMany(targetEntity="Buying", mappedBy="user", cascade={"remove"})
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
     protected $buying;
+	
+	/**
+	*
+	*@ORM\OneToMany(targetEntity="OtherDeliveryData", mappedBy="user", cascade={"remove"})
+	*@ORM\JoinColumn(name="user_id", referencedColumnName="id")
+	*/
+	protected $deliveryData;
+	
+	
+	/**
+	 * @ORM\OneToMany(targetEntity="Rental", mappedBy="user")
+	 * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+	 */
+	protected $rental;
 
     public function __construct()
     {
-    	$this->isActive = true;
+    	$this->isActive = null;
     	$this->roles= new \Doctrine\Common\Collections\ArrayCollection();
     	$this->buying= new \Doctrine\Common\Collections\ArrayCollection();
+		$this->deliveryData= new \Doctrine\Common\Collections\ArrayCollection();
+		$this->rental= new \Doctrine\Common\Collections\ArrayCollection();
     }
     
     
@@ -152,6 +175,16 @@ class User implements UserInterface, \Serializable
     public function getPlainPassword()
     {
     	return $this->plainPassword;
+    }
+    
+    public function getActivationKey()
+    {
+    	return $this->activationKey;
+    }
+    
+    public function setActivationKey($activationKey){
+    	
+    	$this->activationKey = $activationKey;
     }
     
     public function setPlainPassword($plainPassword)
@@ -219,6 +252,10 @@ class User implements UserInterface, \Serializable
      */
     public function setIsActive($isActive)
     {
+    	if($isActive === 1){
+    		$this->setActivationKey(0);
+    	}
+    	
         $this->isActive = $isActive;
 
         return $this;
