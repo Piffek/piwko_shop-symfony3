@@ -63,6 +63,13 @@ class User implements UserInterface, \Serializable
      * @Assert\Length(max=4096)
      */
     private $plainPassword;
+    
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="activationKey", type="string", length=1000, nullable=true)
+     */
+    private $activationKey;
 
     /**
      * @var string
@@ -123,7 +130,7 @@ class User implements UserInterface, \Serializable
 
     public function __construct()
     {
-    	$this->isActive = true;
+    	$this->isActive = null;
     	$this->roles= new \Doctrine\Common\Collections\ArrayCollection();
     	$this->buying= new \Doctrine\Common\Collections\ArrayCollection();
 		$this->deliveryData= new \Doctrine\Common\Collections\ArrayCollection();
@@ -168,6 +175,16 @@ class User implements UserInterface, \Serializable
     public function getPlainPassword()
     {
     	return $this->plainPassword;
+    }
+    
+    public function getActivationKey()
+    {
+    	return $this->activationKey;
+    }
+    
+    public function setActivationKey($activationKey){
+    	
+    	$this->activationKey = $activationKey;
     }
     
     public function setPlainPassword($plainPassword)
