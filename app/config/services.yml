@@ -24,3 +24,6 @@ services:
         
     app.generate_pdf:
         class: AppBundle\GeneratePDF
+        
+    app.send_mail:
+        class: AppBundle\SendMail

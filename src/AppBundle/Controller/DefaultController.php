@@ -21,7 +21,7 @@ class DefaultController extends Controller
         	   ->from('AppBundle:Item', 'u')
         	   ->getQuery()
         	   ->getResult();
-
+        $this->get('app.send_mail')->send();
        	
         return $this->render('default/index.html.twig',[
 			'products' => $products,
