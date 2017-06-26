@@ -5,8 +5,6 @@ namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\JoinColumn;
 use Symfony\Component\HttpFoundation\File\File;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
-use Vich\UploaderBundle\Entity\File as EmbeddedFile;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -463,10 +461,9 @@ class Item
      *
      * @param File|\Symfony\Component\HttpFoundation\File\UploadedFile $image
      *
-     * @return Product
+     * @return Item
      */
-    public function setImageFile(File $image = null)
-    {
+    public function setImageFile(File $image = null){
         $this->imageFile = $image;
 
         if ($image) {
@@ -481,18 +478,16 @@ class Item
     /**
      * @return File|null
      */
-    public function getImageFile()
-    {
+    public function getImageFile(){
         return $this->imageFile;
     }
 
     /**
      * @param string $imageName
      *
-     * @return Product
+     * @return Item
      */
-    public function setImageName($imageName)
-    {
+    public function setImageName($imageName){
         $this->imageName = $imageName;
         
         return $this;
@@ -501,18 +496,16 @@ class Item
     /**
      * @return string|null
      */
-    public function getImageName()
-    {
+    public function getImageName(){
         return $this->imageName;
     }
     
     /**
      * @param integer $imageSize
      *
-     * @return Product
+     * @return Item
      */
-    public function setImageSize($imageSize)
-    {
+    public function setImageSize($imageSize){
         $this->imageSize = $imageSize;
         
         return $this;
@@ -521,8 +514,7 @@ class Item
     /**
      * @return integer|null
      */
-    public function getImageSize()
-    {
+    public function getImageSize(){
         return $this->imageSize;
     }
 }
