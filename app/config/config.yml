@@ -84,8 +84,7 @@ vich_uploader:
     db_driver: orm
     mappings:
         product_image:
-            uri_prefix:         /uploads/productsPhoto
-            upload_destination: '%kernel.root_dir%/../web/uploads/productsPhoto'
+            upload_destination: productsImage
             inject_on_load:     true
             delete_on_update:   true
             delete_on_remove:   true

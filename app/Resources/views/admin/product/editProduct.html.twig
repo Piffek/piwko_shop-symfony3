@@ -2,7 +2,8 @@
 
 {% block body %}
 
-<img src="{{ asset('uploads/productsPhoto/' ~ photo) }}" />
+{% set url = ['/productsImage', photo]|join('/')  %}
+<img src="{{ asset(url) }}" />
 
 	{{ form_start(form) }}
        		

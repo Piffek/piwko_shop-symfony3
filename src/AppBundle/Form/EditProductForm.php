@@ -28,7 +28,7 @@ class EditProductForm extends AbstractType
 		 ->add('imageFile', VichImageType::class, array(
 		 		'label' => 'Zdjecie Produktu',
 		 		'required' => false,
-		 		'allow_delete' => true,
+		 		'allow_delete' => false,
 		 ));
 	 }
 	 
