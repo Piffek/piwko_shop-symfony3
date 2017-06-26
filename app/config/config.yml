@@ -5,9 +5,9 @@ imports:
 
 # Put parameters here that don't need to change on each machine where the app is deployed
 # http://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
+
 parameters:
     locale: en
-    photo_directory: '%kernel.root_dir%/../web/uploads/productsPhoto'
 
 framework:
     #esi: ~
@@ -79,3 +79,10 @@ jms_payment_paypal:
     username: '%payment_paypall_mail%'
     password: '%payment_paypall_pass%'
     signature: '%payment_paypall_signature%'
+
+vich_uploader:
+    db_driver: orm
+    mappings:
+        product_image:
+            uri_prefix:         /uploads/productsPhoto
+            upload_destination: '%kernel.root_dir%/../web/uploads/productsPhoto'

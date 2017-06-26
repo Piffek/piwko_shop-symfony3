@@ -18,6 +18,7 @@ class AppKernel extends Kernel
         	new JMS\Payment\CoreBundle\JMSPaymentCoreBundle(),
         	new JMS\Payment\PaypalBundle\JMSPaymentPaypalBundle(),
         	new WhiteOctober\TCPDFBundle\WhiteOctoberTCPDFBundle(),
+			new Vich\UploaderBundle\VichUploaderBundle(),
             new AppBundle\AppBundle(),
         ];
 

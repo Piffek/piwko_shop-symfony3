@@ -17,10 +17,6 @@ services:
         autowire: true
         tags:
             - { name: doctrine.event_subscriber }
-            
-    app.file_uploader:
-        class: AppBundle\FileUploader
-        arguments: ['%photo_directory%']
         
     app.hash_activate_key:
         class: AppBundle\HashAcitvateKey
