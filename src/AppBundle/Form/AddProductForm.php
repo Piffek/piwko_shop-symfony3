@@ -7,7 +7,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use AppBundle\Entity\Item;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Vich\UploaderBundle\Form\Type\VichFileType;
+use Vich\UploaderBundle\Form\Type\VichImageType;
 
 class AddProductForm extends AbstractType
 {
@@ -25,7 +25,11 @@ class AddProductForm extends AbstractType
 		 ->add('promotion')
 		 ->add('textPromotion', TextType::class, array('attr' => array('minlength' => 4)))
 		 ->add('percentPromotion')
-		 ->add('imageFile', VichFileType::class, array('label' => 'Zdjecie Produktu'));
+		 ->add('imageFile', VichImageType::class, array(
+		 		'label' => 'Zdjecie Produktu',
+		 		'required' => false,
+		 		'allow_delete' => true,		
+		 ));
 	 }
 	 
 	 public function configureOptions(OptionsResolver $resolver){

@@ -129,13 +129,6 @@ class Item
     private $imageName;
 
     /**
-     * @ORM\Column(type="integer")
-     *
-     * @var integer
-     */
-    private $imageSize;
-
-    /**
      * @ORM\Column(type="datetime")
      *
      * @var \DateTime
@@ -501,21 +494,4 @@ class Item
         return $this->imageName;
     }
     
-    /**
-     * @param integer $imageSize
-     *
-     * @return Item
-     */
-    public function setImageSize($imageSize){
-        $this->imageSize = $imageSize;
-        
-        return $this;
-    }
-
-    /**
-     * @return integer|null
-     */
-    public function getImageSize(){
-        return $this->imageSize;
-    }
 }
