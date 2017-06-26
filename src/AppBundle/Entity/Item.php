@@ -483,7 +483,7 @@ class Item
      */
     public function setImageName($imageName){
         $this->imageName = $imageName;
-        
+
         return $this;
     }
 

@@ -86,6 +86,7 @@ vich_uploader:
         product_image:
             uri_prefix:         /uploads/productsPhoto
             upload_destination: '%kernel.root_dir%/../web/uploads/productsPhoto'
-            inject_on_load:     false
+            inject_on_load:     true
             delete_on_update:   true
             delete_on_remove:   true
+            namer:              vich_uploader.namer_uniqid

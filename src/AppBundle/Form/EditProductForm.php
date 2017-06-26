@@ -7,8 +7,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use AppBundle\Entity\Item;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\Extension\Core\Type\FileType;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Vich\UploaderBundle\Form\Type\VichImageType;
 
 class EditProductForm extends AbstractType
 {
@@ -26,13 +25,10 @@ class EditProductForm extends AbstractType
 		 ->add('promotion')
 		 ->add('textPromotion', TextType::class, array('attr' => array('minlength' => 4)))
 		 ->add('percentPromotion')
-		 ->add('photo', FileType::class, array(
-		 		'required'   => false,
-		 		'data_class' => null,
-		 		'data' => function ($photo) {
-		 		return $photo->getPhoto();
-		 		}
-		 		//'data_class' => null,
+		 ->add('imageFile', VichImageType::class, array(
+		 		'label' => 'Zdjecie Produktu',
+		 		'required' => false,
+		 		'allow_delete' => true,
 		 ));
 	 }
 	 

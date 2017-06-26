@@ -39,7 +39,8 @@ class ProductController extends Controller
 		}
 		
 		return $this->render('admin/product/addProduct.html.twig', [
-		    'form' => $form->createView()]);
+		    'form' => $form->createView(), 
+		]);
 	}
 	
 
@@ -64,7 +65,6 @@ class ProductController extends Controller
 		$form = $this->createForm(EditProductForm::class, $item);
 		$form->handleRequest($request);
 		
-		$hasPhoto[] = $item->getPhoto();
 
 		if($form->isValid() && $form->isSubmitted()){	
 		
@@ -76,7 +76,7 @@ class ProductController extends Controller
 		}
 		return $this->render('admin/product/editProduct.html.twig', [
 				'form' => $form->createView(),
-				'photo' => $item->getPhoto()
+				'photo' => $item->getImageName()
 		]);
 	}
 	
