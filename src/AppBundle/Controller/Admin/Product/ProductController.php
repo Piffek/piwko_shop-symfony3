@@ -1,15 +1,14 @@
 <?php 
 namespace AppBundle\Controller\Admin\Product;
 
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\Request;
 use AppBundle\Entity\Item;
-use AppBundle\Entity\Rental;
+use AppBundle\Entity\MiniatureImage;
+use AppBundle\Form\AddMiniatureImageForm;
 use AppBundle\Form\AddProductForm;
 use AppBundle\Form\EditProductForm;
-use AppBundle\Form\AddMiniatureImageForm;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
 
 
 /**
@@ -51,19 +50,21 @@ class ProductController extends Controller
 	 * @Route("/dodajMiniaturki/{id}", name="addMiniature")
 	 */
 	public function addMiniatureAction(Request $request, $id){
-		$thisItem = new Item;
-		$mianiatureForm = $this->createForm(AddMiniatureImageForm::class, $thisItem);
+		$miniatureEntity = new MiniatureImage;
+		$mianiatureForm = $this->createForm(AddMiniatureImageForm::class, $miniatureEntity);
 		$mianiatureForm->handleRequest($request);
 		
 		if($mianiatureForm->isValid() && $mianiatureForm->isSubmitted()){
 		
 			/**
 			 *
-			 * @var Item $miniatureImage
+			 * @var MiniatureImage $miniatureImage
 			 */
 			$miniatureImage = $mianiatureForm->getData();
-		
+			
 			$em = $this->getDoctrine()->getManager();
+			$item = $em->getRepository('AppBundle:Item')->find($id);
+			$miniatureImage->setItem($item);
 			$em->persist($miniatureImage);
 			$em->flush();
 			return $this->redirectToRoute('addMiniature', array(

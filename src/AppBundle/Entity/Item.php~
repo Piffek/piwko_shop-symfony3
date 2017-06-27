@@ -2,17 +2,18 @@
 
 namespace AppBundle\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
-use Doctrine\ORM\Mapping\ManyToMany;
 use Doctrine\ORM\Mapping\JoinColumn;
-use Doctrine\ORM\Mapping\JoinTable;
-use Doctrine\ORM\Mapping\OneToOne;
+use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\File;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Item
  *
  * @ORM\Table(name="item")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\ItemRepository")
+ * @Vich\Uploadable
  */
 class Item
 {
@@ -45,6 +46,15 @@ class Item
      * @ORM\Column(name="amount", type="integer")
      */
     private $amount;
+    
+    
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="kind", type="string", length=255)
+     */
+    private $kind;   
+    
 
     /**
      * @var string
@@ -70,14 +80,14 @@ class Item
     /**
      * @var int
      *
-     * @ORM\Column(name="buyAmount", type="integer", nullable=true))
+     * @ORM\Column(name="buyAmount", type="integer", nullable=true)
      */
     private $buyAmount;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="created_at", type="datetime")
+     * @ORM\Column(name="created_at", type="datetime", nullable=true)
      */
     private $createdAt;
     
@@ -86,7 +96,62 @@ class Item
      * @ORM\JoinColumn(name="item_id", referencedColumnName="id")
      */
 	protected $basket;
+	
+	/**
+	 * @ORM\OneToMany(targetEntity="Rental", mappedBy="item")
+	 * @ORM\JoinColumn(name="item_id", referencedColumnName="id")
+	 */
+	protected $rental;
+	
+	/**
+	 * One Cart has One Customer.
+	 * @ORM\OneToOne(targetEntity="Rental", inversedBy="rentalItem")
+	 * @ORM\JoinColumn(name="rentalId", referencedColumnName="id")
+	 */
+	protected $rentalId;
+	
+	/**
+	 * @ORM\OneToMany(targetEntity="MiniatureImage", mappedBy="item")
+	 * @ORM\JoinColumn(name="item_id", referencedColumnName="id")
+	 */
+	protected $miniatureImage;
 
+
+
+    /**
+     * NOTE: This is not a mapped field of entity metadata, just a simple property.
+     * 
+     * @Vich\UploadableField(mapping="product_image", fileNameProperty="imageName", size="imageSize")
+     * 
+     * @var File
+     */
+    private $imageFile;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     *
+     * @var string
+     */
+    private $imageName;
+
+    /**
+     * @ORM\Column(type="datetime")
+     *
+     * @var \DateTime
+     */
+    private $updatedAt;
+	
+	/**
+	 * Constructor
+	 */
+	public function __construct()
+	{
+		$this->basket = new \Doctrine\Common\Collections\ArrayCollection();
+		$this->rental= new \Doctrine\Common\Collections\ArrayCollection();
+		$this->miniatureImage= new \Doctrine\Common\Collections\ArrayCollection();
+	
+	}
+	
     /**
      * Get id
      *
@@ -96,6 +161,8 @@ class Item
     {
         return $this->id;
     }
+    
+    
 
     /**
      * Set name
@@ -312,4 +379,126 @@ class Item
     {
         return $this->basket;
     }
+
+
+    /**
+     * Add basket
+     *
+     * @param \AppBundle\Entity\Basket $basket
+     *
+     * @return Item
+     */
+    public function addBasket(\AppBundle\Entity\Basket $basket)
+    {
+        $this->basket[] = $basket;
+
+        return $this;
+    }
+
+    /**
+     * Remove basket
+     *
+     * @param \AppBundle\Entity\Basket $basket
+     */
+    public function removeBasket(\AppBundle\Entity\Basket $basket)
+    {
+        $this->basket->removeElement($basket);
+    }
+    
+    /**
+     * Get rental
+     *
+     * @return integer
+     */
+    public function getRental()
+    {
+    	return $this->rental;
+    }
+    
+    /**
+     * Set rental
+     *
+     * @param integer $rental
+     *
+     * @return Item
+     */
+    public function setRental($rental)
+    {
+    	$this->rental = $rental;
+    
+    	return $this;
+    }
+    
+    /**
+     * Get kind
+     *
+     * @return string
+     */
+    public function getKind()
+    {
+    	return $this->kind;
+    }
+    
+    /**
+     * Set kind
+     *
+     * @param string $kind
+     *
+     * @return Item
+     */
+    public function setKind($kind)
+    {
+    	$this->kind = $kind;
+    
+    	return $this;
+    }
+	
+	 /**
+     * If manually uploading a file (i.e. not using Symfony Form) ensure an instance
+     * of 'UploadedFile' is injected into this setter to trigger the  update. If this
+     * bundle's configuration parameter 'inject_on_load' is set to 'true' this setter
+     * must be able to accept an instance of 'File' as the bundle will inject one here
+     * during Doctrine hydration.
+     *
+     * @param File|\Symfony\Component\HttpFoundation\File\UploadedFile $image
+     *
+     * @return Item
+     */
+    public function setImageFile(File $image = null){
+        $this->imageFile = $image;
+
+        if ($image) {
+            // It is required that at least one field changes if you are using doctrine
+            // otherwise the event listeners won't be called and the file is lost
+            $this->updatedAt = new \DateTimeImmutable();
+        }
+        
+        return $this;
+    }
+
+    /**
+     * @return File|null
+     */
+    public function getImageFile(){
+        return $this->imageFile;
+    }
+
+    /**
+     * @param string $imageName
+     *
+     * @return Item
+     */
+    public function setImageName($imageName){
+        $this->imageName = $imageName;
+
+        return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getImageName(){
+        return $this->imageName;
+    }
+    
 }

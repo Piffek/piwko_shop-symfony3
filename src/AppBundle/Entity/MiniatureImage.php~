@@ -76,25 +76,25 @@ class MiniatureImage
     /**
      * Set item
      *
-     * @param \AppBundle\Entity\Item $item
+     * @param integer $item
      *
-     * @return Basket
+     * @return MiniatureImage
      */
-    public function setItem(\AppBundle\Entity\Item $item = null)
+    public function setItem($item)
     {
-    	$this->item = $item;
-    
-    	return $this;
+        $this->item = $item;
+
+        return $this;
     }
-    
+
     /**
      * Get item
      *
-     * @return \AppBundle\Entity\Item
+     * @return int
      */
     public function getItem()
     {
-    	return $this->item;
+        return $this->item;
     }
     
     /**
@@ -145,28 +145,5 @@ class MiniatureImage
     	return $this->imageName;
     }
     
-
-    /**
-     * Set updatedAt
-     *
-     * @param \DateTime $updatedAt
-     *
-     * @return MiniatureImage
-     */
-    public function setUpdatedAt($updatedAt)
-    {
-        $this->updatedAt = $updatedAt;
-
-        return $this;
-    }
-
-    /**
-     * Get updatedAt
-     *
-     * @return \DateTime
-     */
-    public function getUpdatedAt()
-    {
-        return $this->updatedAt;
-    }
 }
+

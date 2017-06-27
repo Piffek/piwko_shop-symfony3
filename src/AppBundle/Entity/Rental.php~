@@ -173,28 +173,5 @@ class Rental
     {
         return $this->user;
     }
-
-    /**
-     * Set rentalItem
-     *
-     * @param \AppBundle\Entity\Item $rentalItem
-     *
-     * @return Rental
-     */
-    public function setRentalItem(\AppBundle\Entity\Item $rentalItem = null)
-    {
-        $this->rentalItem = $rentalItem;
-
-        return $this;
-    }
-
-    /**
-     * Get rentalItem
-     *
-     * @return \AppBundle\Entity\Item
-     */
-    public function getRentalItem()
-    {
-        return $this->rentalItem;
-    }
 }
+

@@ -5,7 +5,7 @@ namespace AppBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use AppBundle\Entity\Item;
+use AppBundle\Entity\MiniatureImage;
 use Vich\UploaderBundle\Form\Type\VichImageType;
 
 class AddMiniatureImageForm extends AbstractType
@@ -24,7 +24,7 @@ class AddMiniatureImageForm extends AbstractType
 	 
 	 public function configureOptions(OptionsResolver $resolver){
 		 $resolver->setDefaults([
-				'data_class' => Item::class
+				'data_class' => MiniatureImage::class
 		]);
 		 
 	 }

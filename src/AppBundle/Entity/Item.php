@@ -148,6 +148,7 @@ class Item
 	{
 		$this->basket = new \Doctrine\Common\Collections\ArrayCollection();
 		$this->rental= new \Doctrine\Common\Collections\ArrayCollection();
+		$this->miniatureImage= new \Doctrine\Common\Collections\ArrayCollection();
 	
 	}
 	
@@ -500,4 +501,110 @@ class Item
         return $this->imageName;
     }
     
+
+    /**
+     * Set updatedAt
+     *
+     * @param \DateTime $updatedAt
+     *
+     * @return Item
+     */
+    public function setUpdatedAt($updatedAt)
+    {
+        $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    /**
+     * Get updatedAt
+     *
+     * @return \DateTime
+     */
+    public function getUpdatedAt()
+    {
+        return $this->updatedAt;
+    }
+
+    /**
+     * Add rental
+     *
+     * @param \AppBundle\Entity\Rental $rental
+     *
+     * @return Item
+     */
+    public function addRental(\AppBundle\Entity\Rental $rental)
+    {
+        $this->rental[] = $rental;
+
+        return $this;
+    }
+
+    /**
+     * Remove rental
+     *
+     * @param \AppBundle\Entity\Rental $rental
+     */
+    public function removeRental(\AppBundle\Entity\Rental $rental)
+    {
+        $this->rental->removeElement($rental);
+    }
+
+    /**
+     * Set rentalId
+     *
+     * @param \AppBundle\Entity\Rental $rentalId
+     *
+     * @return Item
+     */
+    public function setRentalId(\AppBundle\Entity\Rental $rentalId = null)
+    {
+        $this->rentalId = $rentalId;
+
+        return $this;
+    }
+
+    /**
+     * Get rentalId
+     *
+     * @return \AppBundle\Entity\Rental
+     */
+    public function getRentalId()
+    {
+        return $this->rentalId;
+    }
+
+    /**
+     * Add miniatureImage
+     *
+     * @param \AppBundle\Entity\MiniatureImage $miniatureImage
+     *
+     * @return Item
+     */
+    public function addMiniatureImage(\AppBundle\Entity\MiniatureImage $miniatureImage)
+    {
+        $this->miniatureImage[] = $miniatureImage;
+
+        return $this;
+    }
+
+    /**
+     * Remove miniatureImage
+     *
+     * @param \AppBundle\Entity\MiniatureImage $miniatureImage
+     */
+    public function removeMiniatureImage(\AppBundle\Entity\MiniatureImage $miniatureImage)
+    {
+        $this->miniatureImage->removeElement($miniatureImage);
+    }
+
+    /**
+     * Get miniatureImage
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getMiniatureImage()
+    {
+        return $this->miniatureImage;
+    }
 }

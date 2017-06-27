@@ -526,4 +526,72 @@ class User implements UserInterface, \Serializable
     {
         return $this->buying;
     }
+
+    /**
+     * Add deliveryDatum
+     *
+     * @param \AppBundle\Entity\OtherDeliveryData $deliveryDatum
+     *
+     * @return User
+     */
+    public function addDeliveryDatum(\AppBundle\Entity\OtherDeliveryData $deliveryDatum)
+    {
+        $this->deliveryData[] = $deliveryDatum;
+
+        return $this;
+    }
+
+    /**
+     * Remove deliveryDatum
+     *
+     * @param \AppBundle\Entity\OtherDeliveryData $deliveryDatum
+     */
+    public function removeDeliveryDatum(\AppBundle\Entity\OtherDeliveryData $deliveryDatum)
+    {
+        $this->deliveryData->removeElement($deliveryDatum);
+    }
+
+    /**
+     * Get deliveryData
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getDeliveryData()
+    {
+        return $this->deliveryData;
+    }
+
+    /**
+     * Add rental
+     *
+     * @param \AppBundle\Entity\Rental $rental
+     *
+     * @return User
+     */
+    public function addRental(\AppBundle\Entity\Rental $rental)
+    {
+        $this->rental[] = $rental;
+
+        return $this;
+    }
+
+    /**
+     * Remove rental
+     *
+     * @param \AppBundle\Entity\Rental $rental
+     */
+    public function removeRental(\AppBundle\Entity\Rental $rental)
+    {
+        $this->rental->removeElement($rental);
+    }
+
+    /**
+     * Get rental
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getRental()
+    {
+        return $this->rental;
+    }
 }
