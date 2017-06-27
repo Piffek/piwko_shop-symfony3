@@ -9,6 +9,7 @@ use AppBundle\Entity\Item;
 use AppBundle\Entity\Rental;
 use AppBundle\Form\AddProductForm;
 use AppBundle\Form\EditProductForm;
+use AppBundle\Form\AddMiniatureImageForm;
 
 
 /**
@@ -35,11 +36,44 @@ class ProductController extends Controller
 			$em = $this->getDoctrine()->getManager();
 			$em->persist($item);
 			$em->flush();
-			return $this->redirectToRoute('addProduct');
+			return $this->redirectToRoute('addMiniature', array(
+				'id' => $item->getId(),
+			));
 		}
+		
 		
 		return $this->render('admin/product/addProduct.html.twig', [
 		    'form' => $form->createView(), 
+		]);
+	}
+	
+	/**
+	 * @Route("/dodajMiniaturki/{id}", name="addMiniature")
+	 */
+	public function addMiniatureAction(Request $request, $id){
+		$thisItem = new Item;
+		$mianiatureForm = $this->createForm(AddMiniatureImageForm::class, $thisItem);
+		$mianiatureForm->handleRequest($request);
+		
+		if($mianiatureForm->isValid() && $mianiatureForm->isSubmitted()){
+		
+			/**
+			 *
+			 * @var Item $miniatureImage
+			 */
+			$miniatureImage = $mianiatureForm->getData();
+		
+			$em = $this->getDoctrine()->getManager();
+			$em->persist($miniatureImage);
+			$em->flush();
+			return $this->redirectToRoute('addMiniature', array(
+				'id' => $id,
+			));
+		}
+		
+		return $this->render('admin/product/addMiniatureImage.html.twig', [
+				'form' => $mianiatureForm->createView(),
+				'id' => $id,
 		]);
 	}
 	
