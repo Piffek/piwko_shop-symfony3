@@ -91,6 +91,7 @@ vich_uploader:
             namer:              vich_uploader.namer_uniqid
         miniature_image:
             upload_destination: miniatureImage
+            directory_namer:    app.directory_namer
             inject_on_load:     true
             delete_on_update:   true
             delete_on_remove:   true

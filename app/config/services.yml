@@ -20,3 +20,6 @@ services:
         
     app.hash_activate_key:
         class: AppBundle\HashAcitvateKey
+        
+    app.directory_namer:
+        class: AppBundle\CreateDirectoryDuringAddMiniature
