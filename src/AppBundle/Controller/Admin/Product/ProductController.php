@@ -33,8 +33,7 @@ class ProductController extends Controller
 			$item = $form->getData();
 			
 			$em = $this->getDoctrine()->getManager();
-			$em->persist($item);
-			$em->flush();
+			$this->persistAndFlushData($item, $em);
 			return $this->redirectToRoute('addMiniature', array(
 				'id' => $item->getId(),
 			));
@@ -55,18 +54,12 @@ class ProductController extends Controller
 		$mianiatureForm->handleRequest($request);
 		
 		if($mianiatureForm->isValid() && $mianiatureForm->isSubmitted()){
-		
-			/**
-			 *
-			 * @var MiniatureImage $miniatureImage
-			 */
 			$miniatureImage = $mianiatureForm->getData();
 			
 			$em = $this->getDoctrine()->getManager();
 			$item = $em->getRepository('AppBundle:Item')->find($id);
 			$miniatureImage->setItem($item);
-			$em->persist($miniatureImage);
-			$em->flush();
+			$this->persistAndFlushData($miniatureImage, $em);
 			return $this->redirectToRoute('addMiniature', array(
 				'id' => $id,
 			));
@@ -103,9 +96,7 @@ class ProductController extends Controller
 
 		if($form->isValid() && $form->isSubmitted()){	
 		
-
-			$em->persist($item);
-			$em->flush();
+            $this->persistAndFlushData($item, $em);
 			
 			return $this->redirectToRoute('editProduct', array('id' => $id));
 		}
@@ -125,6 +116,11 @@ class ProductController extends Controller
 		$em->remove($item);
 		$em->flush();
 		return $this->redirectToRoute('allProduct');
+	}
+	
+	public function persistAndFlushData($data, $em){
+		$em->persist($data);
+		$em->flush();
 	}
 	
 	
