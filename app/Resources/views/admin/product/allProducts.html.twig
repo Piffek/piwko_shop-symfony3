@@ -7,7 +7,7 @@
     	{{ product.promotion }}<br>
     	{{ product.buyAmount }}<br>
     	<a href=" {{ path('editProduct', {id:product.id}) }} ">Edytuj</a>
-    	<a href=" ">Usuń</a>
+    	<a href=" {{ path('deleteProduct', {id:product.id}) }} ">Usuń</a>
     	<hr>
     {% endfor %}
 {% endblock %}

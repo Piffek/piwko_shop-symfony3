@@ -80,6 +80,23 @@ class ProductController extends Controller
 		]);
 	}
 	
+	/**
+	 * @Route("/usunProdukt/{id}", name="deleteProduct")
+	 */
+	public function deleteProductAction($id){
+		$em = $this->getDoctrine()->getManager();
+		$item = $em->getRepository('AppBundle:Item')->findOneById($id);
+		$this->except($item);
+		$em->remove($item);
+		$em->flush();
+	}
+	
+	
+	public function except($object){
+		if(!$object){
+			throw $this->createNotFoundException('Object %s not found');
+		}
+	}
 	
 	
 }
