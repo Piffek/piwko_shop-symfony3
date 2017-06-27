@@ -89,12 +89,13 @@ class ProductController extends Controller
 		$this->except($item);
 		$em->remove($item);
 		$em->flush();
+		return $this->redirectToRoute('allProduct');
 	}
 	
 	
 	public function except($object){
 		if(!$object){
-			throw $this->createNotFoundException('Object %s not found');
+			throw $this->createNotFoundException('Object not found');
 		}
 	}
 	
