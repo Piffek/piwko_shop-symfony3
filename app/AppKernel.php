@@ -20,6 +20,7 @@ class AppKernel extends Kernel
         	new WhiteOctober\TCPDFBundle\WhiteOctoberTCPDFBundle(),
 			new Vich\UploaderBundle\VichUploaderBundle(),
             new Symfony\Bundle\AsseticBundle\AsseticBundle(),
+            new Liip\ImagineBundle\LiipImagineBundle(),
             new AppBundle\AppBundle(),
         ];
 

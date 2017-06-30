@@ -11,8 +11,7 @@
                 </div>
             {% endif %}
             {{ form_start(form) }}
-                {{ form_row(form._username) }}
-                {{ form_row(form._password) }}
+                {{ form_widget(form) }}
                 <button type="submit" class="btn btn-success">Login <span class="fa fa-lock"></span></button>
             {{ form_end(form) }}
         </div>
