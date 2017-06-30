@@ -96,3 +96,9 @@ vich_uploader:
             delete_on_update:   true
             delete_on_remove:   true
             namer:              vich_uploader.namer_uniqid
+
+assetic:
+    debug:          '%kernel.debug%'
+    use_controller: '%kernel.debug%'
+    filters:
+        cssrewrite: ~

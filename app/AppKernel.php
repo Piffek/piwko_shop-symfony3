@@ -19,6 +19,7 @@ class AppKernel extends Kernel
         	new JMS\Payment\PaypalBundle\JMSPaymentPaypalBundle(),
         	new WhiteOctober\TCPDFBundle\WhiteOctoberTCPDFBundle(),
 			new Vich\UploaderBundle\VichUploaderBundle(),
+            new Symfony\Bundle\AsseticBundle\AsseticBundle(),
             new AppBundle\AppBundle(),
         ];
 
