@@ -96,6 +96,12 @@ vich_uploader:
             delete_on_update:   true
             delete_on_remove:   true
             namer:              vich_uploader.namer_uniqid
+        file_to_rental:
+            upload_destination: file_to_rental
+            inject_on_load:     true
+            delete_on_update:   true
+            delete_on_remove:   true
+            namer:              vich_uploader.namer_uniqid
 
 assetic:
     debug:          '%kernel.debug%'

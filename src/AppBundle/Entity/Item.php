@@ -116,6 +116,13 @@ class Item
 	 * @ORM\JoinColumn(name="item_id", referencedColumnName="id")
 	 */
 	protected $miniatureImage;
+	
+	/**
+	 * 
+	 * @ORM\OneToMany(targetEntity="FileToRental", mappedBy="item")
+	 * @ORM\JoinColumn(name="item_id", referencedColumnName="id")
+	 */
+	protected $fileToRental;
 
 
 
@@ -150,7 +157,7 @@ class Item
 		$this->basket = new \Doctrine\Common\Collections\ArrayCollection();
 		$this->rental= new \Doctrine\Common\Collections\ArrayCollection();
 		$this->miniatureImage= new \Doctrine\Common\Collections\ArrayCollection();
-	
+		$this->fileToRental= new \Doctrine\Common\Collections\ArrayCollection();
 	}
 	
     /**
