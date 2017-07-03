@@ -118,7 +118,6 @@ class Item
 	protected $miniatureImage;
 	
 	/**
-	 * 
 	 * @ORM\OneToMany(targetEntity="FileToRental", mappedBy="item")
 	 * @ORM\JoinColumn(name="item_id", referencedColumnName="id")
 	 */
@@ -616,4 +615,38 @@ class Item
         return $this->miniatureImage;
     }
     
+
+    /**
+     * Add fileToRental
+     *
+     * @param \AppBundle\Entity\FileToRental $fileToRental
+     *
+     * @return Item
+     */
+    public function addFileToRental(\AppBundle\Entity\FileToRental $fileToRental)
+    {
+        $this->fileToRental[] = $fileToRental;
+
+        return $this;
+    }
+
+    /**
+     * Remove fileToRental
+     *
+     * @param \AppBundle\Entity\FileToRental $fileToRental
+     */
+    public function removeFileToRental(\AppBundle\Entity\FileToRental $fileToRental)
+    {
+        $this->fileToRental->removeElement($fileToRental);
+    }
+
+    /**
+     * Get fileToRental
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getFileToRental()
+    {
+        return $this->fileToRental;
+    }
 }

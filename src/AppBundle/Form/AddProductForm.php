@@ -9,6 +9,8 @@ use AppBundle\Entity\Item;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Vich\UploaderBundle\Form\Type\VichImageType;
 use Vich\UploaderBundle\Form\Type\VichFileType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
+use AppBundle\Entity\FileToRental;
 
 class AddProductForm extends AbstractType
 {
@@ -30,6 +32,8 @@ class AddProductForm extends AbstractType
 		 		'label' => 'Zdjecie Produktu',
 		 		'required' => false,
 		 		'allow_delete' => true,		
+		 ))->add('fileToRental', CollectionType::class, array(
+            'entry_type' => FileToRental::class, 
 		 ));
 	 }
 	 

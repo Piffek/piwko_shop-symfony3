@@ -6,6 +6,7 @@ use Doctrine\ORM\Mapping\JoinColumn;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * FileToRental
@@ -27,15 +28,18 @@ class FileToRental
     
     /**
      * @var int
-     * @ORM\ManyToOne(targetEntity="Item", inversedBy="FileToRental")
+     * @ORM\ManyToOne(targetEntity="Item", inversedBy="fileToRental")
      * @ORM\JoinColumn(name="item_id", referencedColumnName="id")
      */
     protected $item;
     
     /**
-     * NOTE: This is not a mapped field of entity metadata, just a simple property.
+     * @Assert\File(
+     *     maxSize="5M",
+     *     mimeTypes={"image/png", "image/jpeg", "image/pjpeg"}
+     * )
      *
-     * @Vich\UploadableField(mapping="file_to_rental", fileNameProperty="fileName")
+     * @Vich\UploadableField(mapping="file", fileNameProperty="fileName")
      *
      * @var File
      */
