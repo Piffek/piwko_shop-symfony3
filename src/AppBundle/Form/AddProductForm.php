@@ -33,7 +33,7 @@ class AddProductForm extends AbstractType
 		 		'required' => false,
 		 		'allow_delete' => true,		
 		 ))->add('fileToRental', CollectionType::class, array(
-            'entry_type' => FileToRental::class, 
+                'entry_type' => FileToRental::class, 
 		 ));
 	 }
 	 
