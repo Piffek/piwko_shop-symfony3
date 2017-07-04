@@ -118,6 +118,7 @@ class Item
 	protected $miniatureImage;
 	
 	/**
+	 * 
 	 * @ORM\OneToMany(targetEntity="FileToRental", mappedBy="item")
 	 * @ORM\JoinColumn(name="item_id", referencedColumnName="id")
 	 */

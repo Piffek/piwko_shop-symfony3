@@ -27,6 +27,7 @@ class FileToRental
     private $id;
     
     /**
+     * 
      * @var int
      * @ORM\ManyToOne(targetEntity="Item", inversedBy="fileToRental")
      * @ORM\JoinColumn(name="item_id", referencedColumnName="id")
